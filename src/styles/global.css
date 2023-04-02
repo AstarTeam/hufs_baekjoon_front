@@ -1,0 +1,78 @@
+:root {
+  /* 색상 */
+  --black-color: #27272a;
+  --dark-color: #23262f;
+  --primary-color: #3f3f46;
+  --secondary-color: #878787;
+  --tertiary-color: #b4b4b4;
+  --border-color: #dddddd;
+  --bright-grey-color: #efefef;
+  --white-grey-color: #f9f9f9;
+  --white-color: #ffffff;
+  --main-color: #428bca;
+  --blue-color: #428eff;
+  --white-blue-color: #e7f2ff;
+  --green-color: #5cb85c;
+  --red-color: #e55024;
+  --orange-color: #ec9a00;
+  --gold-color: #bb9868;
+  --brown-color: #996644;
+  --hufs-color: #0b2a4a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
+  font-size: 10px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  border: 0;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+button {
+  padding: 0;
+}
+
+ul,
+ol {
+  padding-left: 0;
+  list-style: none;
+}
+
+.a11y-hidden {
+  overflow: hidden;
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+}
