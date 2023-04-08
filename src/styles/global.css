@@ -1,23 +1,31 @@
 :root {
-  /* 색상 */
-  --black-color: #27272a;
-  --dark-color: #23262f;
-  --primary-color: #3f3f46;
-  --secondary-color: #878787;
-  --tertiary-color: #b4b4b4;
-  --border-color: #dddddd;
-  --bright-grey-color: #efefef;
-  --white-grey-color: #f9f9f9;
-  --white-color: #ffffff;
-  --main-color: #428bca;
-  --blue-color: #428eff;
-  --white-blue-color: #e7f2ff;
-  --green-color: #5cb85c;
-  --red-color: #e55024;
-  --orange-color: #ec9a00;
-  --gold-color: #bb9868;
-  --brown-color: #996644;
-  --hufs-color: #0b2a4a;
+  /* color */
+  --color-black: #27272a;
+  --color-dark: #23262f;
+  --color-primary: #3f3f46;
+  --color-secondary: #878787;
+  --color-tertiary: #b4b4b4;
+  --color-border: #dddddd;
+  --color-bright-grey: #efefef;
+  --color-white-grey: #f9f9f9;
+  --color-white: #ffffff;
+  --color-main: #428bca;
+  --color-blue: #428eff;
+  --color-white-blue: #e7f2ff;
+  --color-green: #5cb85c;
+  --color-red: #e55024;
+  --color-orange: #ec9a00;
+  --color-gold: #bb9868;
+  --color-brown: #996644;
+  --color-hufs: #0b2a4a;
+
+  /* font weight */
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-regular: 400;
+
+  /* transition */
+  --transition-smooth: all 200ms ease-in-out;
 }
 
 * {
