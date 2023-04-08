@@ -1,0 +1,22 @@
+.button {
+  padding: 0 0.95rem;
+  height: 4rem;
+  background-color: var(--color-tertiary);
+  color: var(--color-white);
+  border-radius: 1rem;
+  font-weight: var(--weight-semi-bold);
+  transition: var(--transition-smooth);
+}
+
+.button:hover {
+  background-color: var(--color-secondary);
+}
+
+.button a {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 0.8rem;
+}
