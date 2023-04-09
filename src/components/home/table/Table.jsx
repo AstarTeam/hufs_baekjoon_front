@@ -2,6 +2,7 @@ import React from "react";
 import { useTable } from "react-table";
 import styles from "./table.module.css";
 import silver1 from "../../../assets/icons/level/silver1.svg";
+import Button from "../button/Button";
 
 function Table() {
   const data = React.useMemo(() => dummyData, []);
@@ -14,7 +15,11 @@ function Table() {
         accessor: "difficulty",
         Cell: () => <img src={silver1} alt="silver1" className={styles.icon} />,
       },
-      { Header: "나의 도전 상태", accessor: "myState", Cell: () => <Button /> },
+      {
+        Header: "나의 도전 상태",
+        accessor: "myState",
+        Cell: () => <Button label="아직 안품" color="gray" />,
+      },
       { Header: "외대 도전자 수", accessor: "challengerNum" },
     ],
     []
@@ -81,7 +86,3 @@ const dummyData = [
     challengerNum: 123,
   },
 ];
-
-const Button = () => {
-  return <button>안녕</button>;
-};

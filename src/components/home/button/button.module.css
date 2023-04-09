@@ -1,0 +1,29 @@
+.button {
+  z-index: 10;
+  width: 100%;
+  padding: 0.6rem 1.6rem;
+  border-radius: 1rem;
+  font-weight: var(--weight-bold);
+  transition: var(--transition-smooth);
+  border: 1px solid transparent;
+}
+
+.button.blue {
+  background-color: var(--color-white-blue);
+  color: var(--color-blue);
+}
+
+.button.blue:hover {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-blue);
+}
+
+.button.gray {
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.button.gray:hover {
+  background-color: var(--color-tertiary);
+  color: var(--color-white);
+}
