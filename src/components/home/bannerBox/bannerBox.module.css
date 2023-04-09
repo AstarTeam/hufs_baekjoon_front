@@ -1,0 +1,52 @@
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 29rem;
+  height: 18rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: var(--color-white) 1px solid;
+}
+
+.container.main {
+  border: var(--color-main) 0.3rem solid;
+}
+
+.rank {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  padding: 0 2.5rem;
+  font-size: 2.6rem;
+  border: 1px solid var(--color-secondary);
+  border-radius: 1rem;
+  color: var(--color-secondary);
+  background-color: var(--color-white);
+}
+
+.rank span {
+  font-weight: var(--weight-semi-bold);
+}
+
+.name {
+  font-size: 3em;
+  font-weight: var(--weight-semi-bold);
+  line-height: 4.4rem;
+}
+
+.container.main .name {
+  font-size: 3.2rem;
+}
+
+.correct {
+  font-size: 2.2rem;
+  line-height: 2.8rem;
+}
+
+.container.main .correct {
+  font-size: 2.4rem;
+}

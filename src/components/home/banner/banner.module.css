@@ -1,0 +1,15 @@
+.banner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 5.5rem 0 7rem;
+  background-color: var(--color-primary);
+  color: var(--color-border);
+}
+
+.container {
+  width: 100%;
+  max-width: 140rem;
+  display: flex;
+  justify-content: space-between;
+}
