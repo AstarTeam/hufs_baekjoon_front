@@ -1,0 +1,39 @@
+.max-width {
+  width: 100%;
+  max-width: 130rem;
+  padding: 0 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  padding: 4rem 0 4rem 2rem;
+  font-size: 2.8rem;
+  color: var(--color-secondary);
+}
+
+.rank-container {
+  max-width: 115rem;
+  margin: 5rem auto 6rem;
+}
+
+.table-wrapper {
+  margin-bottom: 10rem;
+}
+
+.table-wrapper > div {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-title {
+  color: var(--color-primiary);
+  font-size: 2rem;
+  line-height: 3.6rem;
+}
