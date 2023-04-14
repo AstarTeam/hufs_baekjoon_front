@@ -84,3 +84,9 @@ ol {
   border: 0;
   padding: 0;
 }
+
+.txt-ellipsie {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

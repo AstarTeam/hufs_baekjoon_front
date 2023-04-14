@@ -1,0 +1,61 @@
+.container {
+  position: relative;
+  width: 13.8rem;
+  font-size: 1.4rem;
+}
+
+.select-button {
+  width: 100%;
+  padding: 0.6rem 1.6rem 0.6rem 1rem;
+  border-radius: 1rem;
+  border: 1px var(--color-border) solid;
+  text-align: start;
+  cursor: pointer;
+
+  background: url(../../../assets/icons/arrow_down.svg) no-repeat;
+  background-position: right 1.3rem center;
+}
+
+.select-button:hover {
+  border-color: var(--color-blue);
+}
+
+.select-button.on {
+  outline: 3px solid var(--color-white-blue);
+  border-color: var(--color-blue);
+  background-image: url(../../../assets/icons/arrow_up.svg);
+}
+
+.lists {
+  position: absolute;
+  top: 3.8rem;
+  width: 13.8rem;
+  padding: 0.3rem 0;
+  background-color: white;
+  border: 1px var(--color-border) solid;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 14px 0px #00000026;
+  display: none;
+  z-index: 100;
+}
+
+.select-button.on + .lists {
+  display: block;
+}
+
+.lists li button {
+  display: block;
+  width: 95%;
+  height: 3rem;
+  margin: 0.4rem auto;
+  padding-left: 1rem;
+  text-align: start;
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+
+.lists li:hover button,
+.lists li:focus button {
+  color: var(--color-blue);
+  background-color: var(--color-white-blue);
+}
