@@ -1,0 +1,20 @@
+.container {
+  margin-bottom: 10rem;
+}
+
+.title-wrapper {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.table-wrapper {
+  margin-bottom: 4rem;
+}
+
+.table-title {
+  color: var(--color-primiary);
+  font-size: 2rem;
+  line-height: 3.6rem;
+}

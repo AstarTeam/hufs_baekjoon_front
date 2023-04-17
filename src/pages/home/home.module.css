@@ -16,24 +16,7 @@
   color: var(--color-secondary);
 }
 
-.rank-container {
+.contents-wrapper > div:first-child {
   max-width: 115rem;
   margin: 5rem auto 6rem;
-}
-
-.table-wrapper {
-  margin-bottom: 10rem;
-}
-
-.table-wrapper > div {
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.table-title {
-  color: var(--color-primiary);
-  font-size: 2rem;
-  line-height: 3.6rem;
 }
