@@ -1,15 +1,18 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/home/Home";
+import Join from "./pages/join/Join";
+import LogIn from "./pages/logIn/LogIn";
+import Mypage from "./pages/mypage/Mypage";
 
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<p>로그인페이지</p>} />
-        <Route path="/join" element={<p>회원가입페이지</p>} />
-        <Route path="/mypage" element={<p>마이페이지</p>} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/mypage" element={<Mypage />} />
       </Route>
       <Route path="/*" element={<p>Error</p>} />
     </Routes>

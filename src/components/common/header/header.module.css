@@ -13,6 +13,7 @@
   height: 100%;
   font-size: 1.6rem;
   color: var(--color-secondary);
+  cursor: pointer;
 }
 
 .text-container {
@@ -25,6 +26,7 @@
 
 .text-logo-container {
   display: flex;
+  cursor: pointer;
 }
 
 .text-wrapper {
