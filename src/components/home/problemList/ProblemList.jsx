@@ -85,7 +85,13 @@ const columnList = [
   {
     Header: "나의 도전 상태",
     accessor: "myState",
-    Cell: () => <Button label="아직 안품" color="gray" />,
+    Cell: ({ cell: { value } }) => (
+      <Button
+        label={`${value ? "도전 중" : "아직 안품"}`}
+        color={`${value ? "blue" : "gray"}`}
+        value={value}
+      />
+    ),
   },
   { Header: "외대 도전자 수", accessor: "challengerNum" },
 ];
