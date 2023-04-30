@@ -8,8 +8,7 @@ function SelectBox({ list, onSelectChange, selected }) {
   const openClass = isOpen ? "on" : "";
 
   const clickOutsideHandler = ({ target }) => {
-    if (!target) return;
-    if (!selectBoxRef.current.contains(target)) setIsOpen(false);
+    if (!selectBoxRef?.current.contains(target)) setIsOpen(false);
   };
   const openHandler = () => setIsOpen(prev => !prev);
   const selectHandler = item => {
@@ -21,6 +20,9 @@ function SelectBox({ list, onSelectChange, selected }) {
     if (isOpen) {
       window.addEventListener("click", clickOutsideHandler);
     }
+    return () => {
+      window.removeEventListener("click", clickOutsideHandler);
+    };
   }, [isOpen]);
 
   return (
@@ -29,7 +31,7 @@ function SelectBox({ list, onSelectChange, selected }) {
         className={`${styles["select-button"]} ${styles[openClass]}`}
         onClick={openHandler}
       >
-        {selected}
+        {selected.label}
       </button>
       <ul className={styles.lists}>
         {list.map((item, index) => (
@@ -39,7 +41,7 @@ function SelectBox({ list, onSelectChange, selected }) {
               className="txt-ellipsie"
               onClick={() => selectHandler(item)}
             >
-              {item}
+              {item.label}
             </button>
           </li>
         ))}

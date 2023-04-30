@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "../../common/table/Table";
 import PaginationBtn from "../../common/paginationBtn/PaginationBtn";
 import SelectBox from "../../common/selectBox/SelectBox";
 import styles from "./problemList.module.css";
 import silver1 from "../../../assets/icons/level/silver1.svg";
 import Button from "../../home/button/Button";
+import { sortDoingNow, sortNotStarted } from "../../../utils/problemSort";
 
 function ProblemList() {
   const selectList = [
-    "정렬 방식",
-    "도전중인 문제",
-    "안푼 문제",
-    "쉬운 순",
-    "어려운 순",
-    "도전자 많은 순",
-    "도전자 적은 순",
+    { id: 0, label: "정렬 방식" },
+    { id: 1, label: "도전중인 문제" },
+    { id: 2, label: "안푼 문제" },
+    { id: 3, label: "쉬운 순" },
+    { id: 4, label: "어려운 순" },
+    { id: 5, label: "도전자 많은 순" },
+    { id: 6, label: "도전자 적은 순" },
   ];
+
+  const [problems, setProblems] = useState(dummyData); //전체 문제 데이타 - api를 통해 받아와야 함
+  const [sortedProblems, setSortedProblems] = useState(dummyData); //정렬된 문제 데이타
 
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(selectList[0]);
@@ -29,7 +33,18 @@ function ProblemList() {
       return result;
     }
   };
+  const sortDataHandler = problems => {
+    let sorted = problems;
+    if (selected.id === 1) sorted = sortDoingNow(problems);
+    else if (selected.id === 2) sorted = sortNotStarted(problems);
+    setSortedProblems(sorted);
+    setPage(1);
+  };
   const selectChangeHandler = item => setSelected(item);
+
+  useEffect(() => {
+    sortDataHandler(problems);
+  }, [selected.id]);
 
   return (
     <div className={styles.container}>
@@ -42,12 +57,15 @@ function ProblemList() {
         />
       </div>
       <div className={styles["table-wrapper"]}>
-        <Table dataList={postDataHandler(dummyData)} columnList={columnList} />
+        <Table
+          dataList={postDataHandler(sortedProblems)}
+          columnList={columnList}
+        />
       </div>
       <PaginationBtn
         page={page}
         limit={limit}
-        totalNum={dummyData.length}
+        totalNum={sortedProblems.length}
         onPageChange={pageChangeHandler}
       />
     </div>
@@ -77,7 +95,7 @@ const dummyData = [
     id: 1000,
     title: "A+B",
     difficulty: "silver1",
-    myState: false,
+    myState: true,
     challengerNum: 1,
   },
   {
@@ -98,14 +116,14 @@ const dummyData = [
     id: 1003,
     title: "A+B",
     difficulty: "silver4",
-    myState: false,
+    myState: true,
     challengerNum: 1,
   },
   {
     id: 1004,
     title: "A+B",
     difficulty: "silver2",
-    myState: false,
+    myState: true,
     challengerNum: 13,
   },
   {
@@ -119,7 +137,7 @@ const dummyData = [
     id: 1006,
     title: "A+B",
     difficulty: "silver1",
-    myState: false,
+    myState: true,
     challengerNum: 23,
   },
   {
@@ -133,7 +151,7 @@ const dummyData = [
     id: 1008,
     title: "A+B",
     difficulty: "silver1",
-    myState: false,
+    myState: true,
     challengerNum: 3,
   },
   {
