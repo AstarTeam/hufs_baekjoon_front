@@ -18,6 +18,7 @@ function ProblemList() {
   ];
 
   const [page, setPage] = useState(1);
+  const [selected, setSelected] = useState(selectList[0]);
   const limit = 10;
   const offset = (page - 1) * limit; //시작점과 끝점을 구하는 offset
 
@@ -28,12 +29,17 @@ function ProblemList() {
       return result;
     }
   };
+  const selectChangeHandler = item => setSelected(item);
 
   return (
     <div className={styles.container}>
       <div className={styles["title-wrapper"]}>
         <h3 className={styles["table-title"]}>한국외대 미해결 문제</h3>
-        <SelectBox list={selectList} />
+        <SelectBox
+          list={selectList}
+          onSelectChange={selectChangeHandler}
+          selected={selected}
+        />
       </div>
       <div className={styles["table-wrapper"]}>
         <Table dataList={postDataHandler(dummyData)} columnList={columnList} />
@@ -72,178 +78,178 @@ const dummyData = [
     title: "A+B",
     difficulty: "silver1",
     myState: false,
-    challengerNum: 123,
+    challengerNum: 1,
   },
   {
     id: 1001,
     title: "A+B",
-    difficulty: "silver1",
+    difficulty: "silver2",
     myState: false,
-    challengerNum: 123,
+    challengerNum: 12,
   },
   {
     id: 1002,
+    title: "A+B",
+    difficulty: "silver5",
+    myState: false,
+    challengerNum: 3,
+  },
+  {
+    id: 1003,
+    title: "A+B",
+    difficulty: "silver4",
+    myState: false,
+    challengerNum: 1,
+  },
+  {
+    id: 1004,
+    title: "A+B",
+    difficulty: "silver2",
+    myState: false,
+    challengerNum: 13,
+  },
+  {
+    id: 1005,
+    title: "A+B",
+    difficulty: "silver4",
+    myState: false,
+    challengerNum: 12,
+  },
+  {
+    id: 1006,
+    title: "A+B",
+    difficulty: "silver1",
+    myState: false,
+    challengerNum: 23,
+  },
+  {
+    id: 1007,
+    title: "A+B",
+    difficulty: "silver1",
+    myState: false,
+    challengerNum: 3,
+  },
+  {
+    id: 1008,
+    title: "A+B",
+    difficulty: "silver1",
+    myState: false,
+    challengerNum: 3,
+  },
+  {
+    id: 1009,
+    title: "A+B",
+    difficulty: "silver1",
+    myState: false,
+    challengerNum: 12,
+  },
+  {
+    id: 1010,
+    title: "A+B",
+    difficulty: "silver1",
+    myState: false,
+    challengerNum: 13,
+  },
+  {
+    id: 1011,
+    title: "A+B",
+    difficulty: "silver1",
+    myState: false,
+    challengerNum: 23,
+  },
+  {
+    id: 1012,
+    title: "A+B",
+    difficulty: "silver1",
+    myState: false,
+    challengerNum: 12,
+  },
+  {
+    id: 1013,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1014,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1015,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1016,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1017,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1018,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1019,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1020,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1021,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1022,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1023,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
+    id: 1024,
     title: "A+B",
     difficulty: "silver1",
     myState: false,
     challengerNum: 123,
   },
   {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
-    title: "A+B",
-    difficulty: "silver1",
-    myState: false,
-    challengerNum: 123,
-  },
-  {
-    id: 1002,
+    id: 1025,
     title: "A+B",
     difficulty: "silver1",
     myState: false,

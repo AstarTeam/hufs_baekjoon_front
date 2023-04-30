@@ -1,19 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import styles from "./selectBox.module.css";
 
-function SelectBox({ list }) {
+function SelectBox({ list, onSelectChange, selected }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(list[0]);
   const selectBoxRef = useRef();
 
   const openClass = isOpen ? "on" : "";
 
   const clickOutsideHandler = ({ target }) => {
+    if (!target) return;
     if (!selectBoxRef.current.contains(target)) setIsOpen(false);
   };
   const openHandler = () => setIsOpen(prev => !prev);
   const selectHandler = item => {
-    setSelected(item);
+    onSelectChange(item);
     openHandler();
   };
 
