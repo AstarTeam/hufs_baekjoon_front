@@ -8,6 +8,7 @@ import Button from "../../home/button/Button";
 
 function ProblemList() {
   const selectList = [
+    "정렬 방식",
     "도전중인 문제",
     "안푼 문제",
     "쉬운 순",
