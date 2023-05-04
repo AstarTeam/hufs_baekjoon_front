@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./login.module.css";
+import { Link } from "react-router-dom";
 
-function LogIn() {
+function Login() {
   return (
     <div className={styles["login-wrapper"]}>
       <form className={styles["form-container"]}>
@@ -12,10 +13,18 @@ function LogIn() {
         <button className={styles["form-button"]} type="submit">
           로그인
         </button>
-        <p className={styles.text}>Home | 회원가입</p>
+        <div className={styles["text-container"]}>
+          <p className={styles.text}>
+            <Link to="/">Home</Link>
+          </p>
+          <p className={styles.text}>|</p>
+          <p className={styles.text}>
+            <Link to="/join">회원가입</Link>
+          </p>
+        </div>
       </form>
     </div>
   );
 }
 
-export default LogIn;
+export default Login;
