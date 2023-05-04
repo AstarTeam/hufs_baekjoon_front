@@ -10,8 +10,9 @@
   border-radius: 1rem;
   border: 1px var(--color-border) solid;
   text-align: start;
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-primary);
   cursor: pointer;
-
   background: url(../../../assets/icons/arrow_down.svg) no-repeat;
   background-position: right 1.3rem center;
 }
@@ -58,4 +59,5 @@
 .lists li:focus button {
   color: var(--color-blue);
   background-color: var(--color-white-blue);
+  font-weight: var(--weight-semi-bold);
 }
