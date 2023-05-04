@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import logo from "../../../assets/icons/logo_navy.svg";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 function Header() {
   // 추가 CSSS 스타일 입히기
@@ -19,45 +19,29 @@ function Header() {
   const [isMypage, setIsMypage] = useState(location.pathname === "/mypage");
   const colorClass = isHome ? "blue" : "";
 
-  // 클릭에 따른 주소 이동
-  const navigate = useNavigate();
-  const goLogIn = () => {
-    navigate("/login");
-  };
-  const goHome = () => {
-    navigate("/");
-  };
-  const goJoin = () => {
-    navigate("/join");
-  };
-  const goMypage = () => {
-    navigate("/mypage");
-  };
-
   return (
     <header className={styles.header}>
       <p className={styles["text-wrapper"]}>
         <p className={styles["text-logo-container"]}>
-          <img style={logoStyles} src={logo} alt="로고" onClick={goHome} />
+          <Link to="/">
+            <img style={logoStyles} src={logo} alt="로고" />
+          </Link>
           <p className={styles["text-container"]}>
-            <p
-              className={`${styles[colorClass]} ${styles.text}`}
-              onClick={goHome}
-            >
-              HOME
+            <p className={`${styles[colorClass]} ${styles.text}`}>
+              <Link to="/">HOME</Link>
             </p>
-            <p className={styles.text} onClick={goMypage}>
-              마이페이지
+            <p className={styles.text}>
+              <Link to="/mypage">마이페이지</Link>
             </p>
           </p>
         </p>
         <p style={RigntTextStyles} className={styles["text-container"]}>
-          <p className={styles.text} onClick={goJoin}>
-            회원가입
+          <p className={styles.text}>
+            <Link to="join">회원가입</Link>
           </p>
           <p className={styles.text}>|</p>
-          <p className={styles.text} onClick={goLogIn}>
-            로그인
+          <p className={styles.text}>
+            <Link to="/login">로그인</Link>
           </p>
         </p>
       </p>
