@@ -3,7 +3,7 @@ import styles from "./login.module.css";
 
 function LogIn() {
   return (
-    <p className={styles["login-wrapper"]}>
+    <div className={styles["login-wrapper"]}>
       <form className={styles["form-container"]}>
         <p className={styles.title}>LOGIN</p>
         <p className={styles.subtitle}>아이디와 비밀번호를 입력해주세요.</p>
@@ -14,7 +14,7 @@ function LogIn() {
         </button>
         <p className={styles.text}>Home | 회원가입</p>
       </form>
-    </p>
+    </div>
   );
 }
 
