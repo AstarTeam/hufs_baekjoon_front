@@ -12,14 +12,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/join" element={<Join />} />
-        <Route path="/mypage" element={<Mypage />} />
-      </Route>
-      <Route path="/*" element={<p>Error</p>} />
-    </Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/mypage" element={<Mypage />} />
+        </Route>
+        <Route path="/*" element={<p>Error</p>} />
+      </Routes>
     </QueryClientProvider>
   );
 }
