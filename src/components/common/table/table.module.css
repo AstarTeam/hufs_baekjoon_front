@@ -50,7 +50,7 @@
 }
 
 .th:last-child {
-  width: 17rem;
+  width: 15rem;
   border-top-right-radius: 1rem;
 }
 
@@ -94,9 +94,4 @@ tbody .tr:last-child .td:first-child {
 
 tbody .tr:last-child .td:last-child {
   border-bottom-right-radius: 1rem;
-}
-
-.icon {
-  width: 2rem;
-  height: 2.5rem;
 }

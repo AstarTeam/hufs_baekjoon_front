@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./levelIcon.module.css";
 
 function LevelIcon({ level }) {
   const name = levelList.find(item => item.id === level).level;
@@ -7,6 +8,7 @@ function LevelIcon({ level }) {
     <img
       src={require(`../../../assets/icons/level/${level.toString()}.svg`)}
       alt={name}
+      className={styles.icon}
     />
   );
 }
