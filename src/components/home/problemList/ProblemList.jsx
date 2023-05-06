@@ -7,7 +7,7 @@ import PaginationBtn from "../../common/paginationBtn/PaginationBtn";
 import SelectBox from "../../common/selectBox/SelectBox";
 import Button from "../../home/button/Button";
 import styles from "./problemList.module.css";
-// import LevelIcon from "../levelIcon/LevelIcon";
+import LevelIcon from "../levelIcon/LevelIcon";
 
 function ProblemList() {
   const {
@@ -94,8 +94,7 @@ const columnList = [
   {
     Header: "난이도",
     accessor: "difficulty",
-    // Cell: ({ cell: { value } }) => <LevelIcon level={value} />,
-    Cell: ({ cell: { value } }) => <div>{value}</div>,
+    Cell: ({ cell: { value } }) => <LevelIcon level={value} />,
   },
   {
     Header: "나의 도전 상태",
