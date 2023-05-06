@@ -90,7 +90,15 @@ const selectList = [
 
 const columnList = [
   { Header: "문제 번호", accessor: "id" },
-  { Header: "문제 제목", accessor: "title" },
+  {
+    Header: "문제 제목",
+    accessor: "title",
+    Cell: ({ row, cell: { value } }) => (
+      <a href={row.original.link} target="_blank" rel="noreferrer">
+        {value}
+      </a>
+    ),
+  },
   {
     Header: "난이도",
     accessor: "difficulty",
