@@ -4,7 +4,6 @@
   padding: 0.6rem 1.6rem;
   border-radius: 1rem;
   font-weight: var(--weight-bold);
-  transition: var(--transition-smooth);
   border: 1px solid transparent;
 }
 
