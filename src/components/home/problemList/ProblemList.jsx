@@ -1,29 +1,24 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-// import { sortDoingNow, sortNotStarted } from "../../../utils/problemSort";
+import axios from "axios";
 import Table from "../../common/table/Table";
 import PaginationBtn from "../../common/paginationBtn/PaginationBtn";
 import SelectBox from "../../common/selectBox/SelectBox";
 import Button from "../../home/button/Button";
-import styles from "./problemList.module.css";
 import LevelIcon from "../levelIcon/LevelIcon";
+import styles from "./problemList.module.css";
+
+async function getProblemList() {
+  const res = await axios(`/data/problems.json`);
+  return res.data.problems;
+}
 
 function ProblemList() {
   const {
     isLoading,
     error,
     data: problems,
-  } = useQuery(
-    ["problems"],
-    async () => {
-      console.log("fetching...");
-      return axios.get("/data/problems.json").then(res => res.data.problems);
-    },
-    { staleTime: 1000 * 60 * 5 }
-  );
-
-  // const [sortedProblems, setSortedProblems] = useState([]); //정렬된 문제 데이타
+  } = useQuery(["problems"], getProblemList, { staleTime: 1000 * 60 * 5 });
 
   //페이지 버튼 클릭시 리스트 처음으로 스크롤
   const problemListRef = useRef(null);
@@ -34,7 +29,7 @@ function ProblemList() {
     });
 
   const [page, setPage] = useState(1);
-  const [selected, setSelected] = useState(selectList[0]);
+  const [selected, setSelected] = useState(selectList[0]); //정렬 방법
   const limit = 10;
   const offset = (page - 1) * limit; //시작점과 끝점을 구하는 offset
 
@@ -48,18 +43,8 @@ function ProblemList() {
       return result;
     }
   };
-  // const sortDataHandler = problems => {
-  //   let sorted = problems;
-  //   if (selected.id === 1) sorted = sortDoingNow(problems);
-  //   else if (selected.id === 2) sorted = sortNotStarted(problems);
-  //   setSortedProblems(sorted);
-  //   setPage(1);
-  // };
-  const selectChangeHandler = item => setSelected(item);
 
-  // useEffect(() => {
-  //   sortDataHandler(problems);
-  // }, [selected.id]);
+  const selectChangeHandler = item => setSelected(item);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
