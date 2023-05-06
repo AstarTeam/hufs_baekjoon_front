@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 // import { sortDoingNow, sortNotStarted } from "../../../utils/problemSort";
@@ -25,12 +25,23 @@ function ProblemList() {
 
   // const [sortedProblems, setSortedProblems] = useState([]); //정렬된 문제 데이타
 
+  //페이지 버튼 클릭시 리스트 처음으로 스크롤
+  const problemListRef = useRef(null);
+  const scrollToList = () =>
+    problemListRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(selectList[0]);
   const limit = 10;
   const offset = (page - 1) * limit; //시작점과 끝점을 구하는 offset
 
-  const pageChangeHandler = page => setPage(page);
+  const pageChangeHandler = page => {
+    setPage(page);
+    scrollToList();
+  };
   const postDataHandler = data => {
     if (data) {
       let result = data.slice(offset, offset + limit);
@@ -54,7 +65,7 @@ function ProblemList() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={problemListRef}>
       <div className={styles["title-wrapper"]}>
         <h3 className={styles["table-title"]}>한국외대 미해결 문제</h3>
         <SelectBox
