@@ -10,7 +10,7 @@ import styles from "./problemList.module.css";
 
 async function getProblemList() {
   const res = await axios(`/data/problems.json`);
-  return res.data.problems;
+  return res.data.problem_list;
 }
 
 function ProblemList() {
@@ -30,7 +30,7 @@ function ProblemList() {
 
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(selectList[0]); //정렬 방법
-  const limit = 10;
+  const limit = 15;
   const offset = (page - 1) * limit; //시작점과 끝점을 구하는 offset
 
   const pageChangeHandler = page => {
@@ -85,19 +85,19 @@ const selectList = [
 ];
 
 const columnList = [
-  { Header: "문제 번호", accessor: "id" },
+  { Header: "문제 번호", accessor: "problem_num" },
   {
     Header: "문제 제목",
-    accessor: "title",
+    accessor: "problem_title",
     Cell: ({ row, cell: { value } }) => (
-      <a href={row.original.link} target="_blank" rel="noreferrer">
+      <a href={row.original.problem_link} target="_blank" rel="noreferrer">
         {value}
       </a>
     ),
   },
   {
     Header: "난이도",
-    accessor: "difficulty",
+    accessor: "problem_lev",
     Cell: ({ cell: { value } }) => <LevelIcon level={value} />,
   },
   {

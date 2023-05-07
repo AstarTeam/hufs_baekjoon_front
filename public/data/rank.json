@@ -1,13 +1,13 @@
 {
   "rank": {
-    "hufsRank": 67,
-    "hufsTotalSolved": 4691,
-    "hufsWeekSolved": 15,
-    "frontName": "펍지",
-    "frontTotalSolved": 4714,
-    "frontWeekSolved": 23,
-    "behindName": "단국대학교",
-    "behindTotalSolved": 4539,
-    "behindWeekSolved": 30
+    "hufs_rank": 65,
+    "hufs_now_solved": 4834,
+    "hufs_pre_solved": 4810,
+    "high_rank_name": "명덕외국어고등학교",
+    "high_rank_now_solved": 4918,
+    "high_rank_pre_solved": 4900,
+    "low_rank_name": "단국대학교",
+    "low_rank_now_solved": 4786,
+    "low_rank_pre_solved": 4760
   }
 }
