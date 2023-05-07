@@ -4,19 +4,28 @@
   align-items: center;
 }
 
-.form-container {
+.title-form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10rem 0;
   width: 50rem;
-  height: 50rem;
+  height: 65rem;
   /* background-color: aqua; */
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+  height: 50rem;
+  /* background-color: bisque; */
+}
+
 .title {
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
   width: 15rem;
   font-size: 4rem;
   font-weight: 600;
@@ -26,15 +35,18 @@
 }
 
 .subtitle {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
   width: 40rem;
   text-align: center;
   font-size: 1.5rem;
+  font-weight: 600;
   color: var(--color-primary);
   /* background-color: greenyellow; */
 }
 
 .label {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
   color: var(--color-secondary);
 }
 
@@ -48,14 +60,34 @@
   /* background-color: yellowgreen; */
 }
 
+.id {
+  width: 27rem;
+}
+
+.email {
+  width: 20rem;
+}
+
 .form-button {
+  margin-top: 2rem;
   margin-bottom: 2.5rem;
   width: 40rem;
   height: 4rem;
+  font-weight: 800;
+  font-size: 1.5rem;
   color: white;
   border-radius: 5px;
   background-color: var(--color-tertiary);
   transition: var(--transition-smooth);
+}
+
+.form-check-button {
+  width: 10rem;
+  height: 4rem;
+  color: var(--color-blue);
+  font-weight: 900;
+  border-radius: 5px;
+  background-color: var(--color-white-blue);
 }
 
 .form-button:hover {
