@@ -53,3 +53,10 @@ ul.pagination li a.active {
   border-color: var(--color-main);
   color: var(--color-main);
 }
+
+.test,
+.test:hover {
+  cursor: default !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-border) !important;
+}

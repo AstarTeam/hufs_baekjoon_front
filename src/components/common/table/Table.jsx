@@ -12,10 +12,14 @@ function Table({ dataList, columnList }) {
   return (
     <table {...getTableProps()} className={styles.table}>
       <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()} className={styles.th}>
+        {headerGroups.map((headerGroup, index) => (
+          <tr {...headerGroup.getHeaderGroupProps()} key={index}>
+            {headerGroup.headers.map((column, index) => (
+              <th
+                {...column.getHeaderProps()}
+                className={styles.th}
+                key={index}
+              >
                 {column.render("Header")}
               </th>
             ))}
@@ -23,13 +27,17 @@ function Table({ dataList, columnList }) {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
+        {rows.map((row, index) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()} className={styles.tr}>
-              {row.cells.map(cell => {
+            <tr {...row.getRowProps()} className={styles.tr} key={index}>
+              {row.cells.map((cell, index) => {
                 return (
-                  <td {...cell.getCellProps()} className={styles.td}>
+                  <td
+                    {...cell.getCellProps()}
+                    className={styles.td}
+                    key={index}
+                  >
                     {cell.render("Cell")}
                   </td>
                 );

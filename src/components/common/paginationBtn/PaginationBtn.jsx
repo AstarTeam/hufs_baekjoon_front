@@ -14,6 +14,7 @@ function PaginationBtn({ page, limit, totalNum, onPageChange }) {
       onChange={onPageChange}
       innerClass={styles.pagination}
       activeClass={styles.active}
+      disabledClass={styles.test}
     />
   );
 }
