@@ -2,13 +2,35 @@ import React from "react";
 import BannerBox from "../bannerBox/BannerBox";
 import styles from "./banner.module.css";
 
-function Banner() {
+function Banner({ rank }) {
+  const {
+    hufs_rank,
+    hufs_now_solved,
+    high_rank_name,
+    high_rank_now_solved,
+    low_rank_name,
+    low_rank_now_solved,
+  } = rank;
+
   return (
     <section className={styles.banner}>
       <div className={styles.container}>
-        <BannerBox rank="66" name="펍지" correct="4714" />
-        <BannerBox rank="67" name="한국외국어대" correct="4691" main={true} />
-        <BannerBox rank="68" name="단국대학교" correct="4539" />
+        <BannerBox
+          rank={hufs_rank - 1}
+          name={high_rank_name}
+          correct={high_rank_now_solved}
+        />
+        <BannerBox
+          rank={hufs_rank}
+          name="한국외국어대"
+          correct={hufs_now_solved}
+          main={true}
+        />
+        <BannerBox
+          rank={hufs_rank + 1}
+          name={low_rank_name}
+          correct={low_rank_now_solved}
+        />
       </div>
     </section>
   );

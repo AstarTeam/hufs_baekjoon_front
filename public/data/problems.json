@@ -1,160 +1,107 @@
 {
-  "problems": [
+  "total": 16211,
+  "problem_list": [
     {
-      "id": 1000,
-      "title": "A+B",
-      "difficulty": 1,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1000,
+      "problem_title": "A+B",
+      "problem_lev": 12,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1001,
-      "title": "피보나치 함수",
-      "difficulty": 2,
-      "link": "https://www.acmicpc.net/problem/1003"
+      "problem_num": 1002,
+      "problem_title": "A+B",
+      "problem_lev": 11,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1002,
-      "title": "A+B",
-      "difficulty": 10,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1003,
+      "problem_title": "A+B",
+      "problem_lev": 15,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1003,
-      "title": "A+B",
-      "difficulty": 11,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1004,
+      "problem_title": "A+B",
+      "problem_lev": 17,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1004,
-      "title": "A+B",
-      "difficulty": 15,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1005,
+      "problem_title": "A+B",
+      "problem_lev": 15,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1005,
-      "title": "A+B",
-      "difficulty": 10,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1006,
+      "problem_title": "A+B",
+      "problem_lev": 13,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1006,
-      "title": "A+B",
-      "difficulty": 1,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1007,
+      "problem_title": "A+B",
+      "problem_lev": 10,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1007,
-      "title": "A+B",
-      "difficulty": 7,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1008,
+      "problem_title": "A+B",
+      "problem_lev": 9,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1008,
-      "title": "A+B",
-      "difficulty": 8,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1009,
+      "problem_title": "A+B",
+      "problem_lev": 8,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1009,
-      "title": "A+B",
-      "difficulty": 9,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1010,
+      "problem_title": "A+B",
+      "problem_lev": 7,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1010,
-      "title": "A+B",
-      "difficulty": 10,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1011,
+      "problem_title": "A+B",
+      "problem_lev": 5,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1011,
-      "title": "A+B",
-      "difficulty": 1,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1012,
+      "problem_title": "A+B",
+      "problem_lev": 1,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1012,
-      "title": "A+B",
-      "difficulty": 2,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1013,
+      "problem_title": "A+B",
+      "problem_lev": 30,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1013,
-      "title": "A+B",
-      "difficulty": 3,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1014,
+      "problem_title": "A+B",
+      "problem_lev": 29,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1014,
-      "title": "A+B",
-      "difficulty": 30,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1015,
+      "problem_title": "A+B",
+      "problem_lev": 14,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1015,
-      "title": "A+B",
-      "difficulty": 9,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1016,
+      "problem_title": "A+B",
+      "problem_lev": 5,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     },
     {
-      "id": 1016,
-      "title": "A+B",
-      "difficulty": 11,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1017,
-      "title": "A+B",
-      "difficulty": 13,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1018,
-      "title": "A+B",
-      "difficulty": 15,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1019,
-      "title": "A+B",
-      "difficulty": 17,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1020,
-      "title": "A+B",
-      "difficulty": 18,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1021,
-      "title": "A+B",
-      "difficulty": 19,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1022,
-      "title": "A+B",
-      "difficulty": 20,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1023,
-      "title": "A+B",
-      "difficulty": 21,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1024,
-      "title": "A+B",
-      "difficulty": 21,
-      "link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "id": 1025,
-      "title": "A+B",
-      "difficulty": 25,
-      "link": "https://www.acmicpc.net/problem/1000"
+      "problem_num": 1017,
+      "problem_title": "A+B",
+      "problem_lev": 3,
+      "problem_link": "https://www.acmicpc.net/problem/1000"
     }
   ]
 }
