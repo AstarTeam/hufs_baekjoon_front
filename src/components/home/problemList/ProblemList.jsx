@@ -1,29 +1,24 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-// import { sortDoingNow, sortNotStarted } from "../../../utils/problemSort";
+import axios from "axios";
 import Table from "../../common/table/Table";
 import PaginationBtn from "../../common/paginationBtn/PaginationBtn";
 import SelectBox from "../../common/selectBox/SelectBox";
 import Button from "../../home/button/Button";
-import styles from "./problemList.module.css";
 import LevelIcon from "../levelIcon/LevelIcon";
+import styles from "./problemList.module.css";
+
+async function getProblemList() {
+  const res = await axios(`/data/problems.json`);
+  return res.data.problem_list;
+}
 
 function ProblemList() {
   const {
     isLoading,
     error,
     data: problems,
-  } = useQuery(
-    ["problems"],
-    async () => {
-      console.log("fetching...");
-      return axios.get("/data/problems.json").then(res => res.data.problems);
-    },
-    { staleTime: 1000 * 60 * 5 }
-  );
-
-  // const [sortedProblems, setSortedProblems] = useState([]); //정렬된 문제 데이타
+  } = useQuery(["problems"], getProblemList, { staleTime: 1000 * 60 * 5 });
 
   //페이지 버튼 클릭시 리스트 처음으로 스크롤
   const problemListRef = useRef(null);
@@ -34,8 +29,8 @@ function ProblemList() {
     });
 
   const [page, setPage] = useState(1);
-  const [selected, setSelected] = useState(selectList[0]);
-  const limit = 10;
+  const [selected, setSelected] = useState(selectList[0]); //정렬 방법
+  const limit = 15;
   const offset = (page - 1) * limit; //시작점과 끝점을 구하는 offset
 
   const pageChangeHandler = page => {
@@ -48,18 +43,8 @@ function ProblemList() {
       return result;
     }
   };
-  // const sortDataHandler = problems => {
-  //   let sorted = problems;
-  //   if (selected.id === 1) sorted = sortDoingNow(problems);
-  //   else if (selected.id === 2) sorted = sortNotStarted(problems);
-  //   setSortedProblems(sorted);
-  //   setPage(1);
-  // };
-  const selectChangeHandler = item => setSelected(item);
 
-  // useEffect(() => {
-  //   sortDataHandler(problems);
-  // }, [selected.id]);
+  const selectChangeHandler = item => setSelected(item);
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -100,19 +85,19 @@ const selectList = [
 ];
 
 const columnList = [
-  { Header: "문제 번호", accessor: "id" },
+  { Header: "문제 번호", accessor: "problem_num" },
   {
     Header: "문제 제목",
-    accessor: "title",
+    accessor: "problem_title",
     Cell: ({ row, cell: { value } }) => (
-      <a href={row.original.link} target="_blank" rel="noreferrer">
+      <a href={row.original.problem_link} target="_blank" rel="noreferrer">
         {value}
       </a>
     ),
   },
   {
     Header: "난이도",
-    accessor: "difficulty",
+    accessor: "problem_lev",
     Cell: ({ cell: { value } }) => <LevelIcon level={value} />,
   },
   {
