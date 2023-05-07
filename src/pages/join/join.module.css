@@ -1,4 +1,4 @@
-.login-wrapper {
+.join-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,24 +27,14 @@
 
 .subtitle {
   margin-bottom: 1.5rem;
-  width: 30rem;
+  width: 40rem;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--color-primary);
-  /* background-color: white; */
+  /* background-color: greenyellow; */
 }
 
-.text-container {
-  width: 10rem;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  /* background-color: beige; */
-}
-
-.text {
-  text-align: center;
-  font-size: 1.3rem;
+.label {
   color: var(--color-secondary);
 }
 
