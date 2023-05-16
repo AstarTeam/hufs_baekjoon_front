@@ -1,9 +1,9 @@
 {
-  "total": 16211,
+  "total": 30,
   "problem_list": [
     {
       "problem_num": 1000,
-      "problem_title": "A+B",
+      "problem_title": "asdkfjaslkdfjlksdajf",
       "problem_lev": 12,
       "problem_link": "https://www.acmicpc.net/problem/1000"
     },
@@ -89,18 +89,6 @@
       "problem_num": 1015,
       "problem_title": "A+B",
       "problem_lev": 14,
-      "problem_link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "problem_num": 1016,
-      "problem_title": "A+B",
-      "problem_lev": 5,
-      "problem_link": "https://www.acmicpc.net/problem/1000"
-    },
-    {
-      "problem_num": 1017,
-      "problem_title": "A+B",
-      "problem_lev": 3,
       "problem_link": "https://www.acmicpc.net/problem/1000"
     }
   ]
