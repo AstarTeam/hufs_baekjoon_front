@@ -71,7 +71,11 @@ function ProblemList() {
         />
       </div>
       <div className={styles["table-wrapper"]}>
-        <Table dataList={data.problem_list} columnList={columnList} />
+        <Table
+          dataList={data.problem_list}
+          columnList={columnList}
+          type="problemList"
+        />
       </div>
       <PaginationBtn
         page={page}
