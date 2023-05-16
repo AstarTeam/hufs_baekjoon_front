@@ -1,16 +1,17 @@
 .footer {
   position: absolute;
+  bottom: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 4.5rem 10rem 5.5rem;
+  padding: 4.5rem 4rem 5.5rem;
   background-color: var(--color-white-grey);
   color: var(--color-tertiary);
 }
 
 .container {
   width: 100%;
-  max-width: 1600px;
+  max-width: 120rem;
   display: flex;
   justify-content: space-between;
 }
@@ -18,7 +19,7 @@
 .text-container {
   display: flex;
   align-items: start;
-  gap: 9rem;
+  gap: 5rem;
 }
 
 .title {
@@ -40,32 +41,4 @@
 .button-container {
   display: flex;
   gap: 2rem;
-}
-
-/* 반응형 */
-@media screen and (max-width: 1000px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .button-container {
-    margin-top: 4rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .footer {
-    padding: 4.5rem 5rem 5.5rem;
-  }
-
-  .text-container {
-    gap: 3rem;
-    flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 479px) {
-  .footer {
-    padding: 4.5rem 5rem 5.5rem;
-  }
 }
