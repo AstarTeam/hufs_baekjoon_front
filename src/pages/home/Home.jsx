@@ -5,6 +5,7 @@ import Banner from "../../components/home/banner/Banner";
 import RankBox from "../../components/home/rankBox/RankBox";
 import ProblemList from "../../components/home/problemList/ProblemList";
 import styles from "./home.module.css";
+import Loading from "../../components/common/loading/Loading";
 
 async function getRankData() {
   const res = await axios(`/data/rank.json`);
@@ -18,7 +19,7 @@ function Home() {
     data: rank,
   } = useQuery(["rank"], getRankData, { staleTime: 1000 * 60 * 5 });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   if (error) return <p>{error}</p>;
 
   return (
