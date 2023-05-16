@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Table from "../../common/table/Table";
 import PaginationBtn from "../../common/paginationBtn/PaginationBtn";
@@ -7,46 +7,57 @@ import SelectBox from "../../common/selectBox/SelectBox";
 import Button from "../../home/button/Button";
 import LevelIcon from "../levelIcon/LevelIcon";
 import styles from "./problemList.module.css";
+import Loading from "../../common/loading/Loading";
 
-async function getProblemList() {
-  const res = await axios(`/data/problems.json`);
-  return res.data.problem_list;
+async function getProblemList(page, type, num) {
+  const url = `/data/problems${page - 1}.json`; //sampleUrl
+  // const url = `/${type}/?page=${page - 1}&size=15`;
+  const res = await axios(url);
+  return res.data;
 }
 
 function ProblemList() {
-  const {
-    isLoading,
-    error,
-    data: problems,
-  } = useQuery(["problems"], getProblemList, { staleTime: 1000 * 60 * 5 });
+  const [page, setPage] = useState(1);
+  const [selected, setSelected] = useState(selectList[0]); //정렬 방법
+
+  const { isLoading, error, data } = useQuery(
+    ["problems", page, selected.type],
+    () => getProblemList(page, selected.type, 1),
+    {
+      staleTime: 1000 * 60 * 5,
+    }
+  );
+  const totalPage = Math.floor(data?.total / 15);
+
+  //prefetch
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    if (page < totalPage) {
+      let nextPage = page + 1;
+      queryClient.prefetchQuery(["problems", nextPage, selected.type], () =>
+        getProblemList(nextPage, selected.type, nextPage)
+      );
+    }
+  }, [totalPage, page, queryClient, selected.type]);
 
   //페이지 버튼 클릭시 리스트 처음으로 스크롤
   const problemListRef = useRef(null);
   const scrollToList = () =>
     problemListRef.current.scrollIntoView({
-      behavior: "smooth",
       block: "start",
     });
 
-  const [page, setPage] = useState(1);
-  const [selected, setSelected] = useState(selectList[0]); //정렬 방법
-  const limit = 15;
-  const offset = (page - 1) * limit; //시작점과 끝점을 구하는 offset
-
   const pageChangeHandler = page => {
-    setPage(page);
     scrollToList();
-  };
-  const postDataHandler = data => {
-    if (data) {
-      let result = data.slice(offset, offset + limit);
-      return result;
-    }
+    setPage(page);
   };
 
-  const selectChangeHandler = item => setSelected(item);
+  const selectChangeHandler = item => {
+    setSelected(item);
+    setPage(1);
+  };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   if (error) return <p>{error}</p>;
 
   return (
@@ -60,12 +71,12 @@ function ProblemList() {
         />
       </div>
       <div className={styles["table-wrapper"]}>
-        <Table dataList={postDataHandler(problems)} columnList={columnList} />
+        <Table dataList={data.problem_list} columnList={columnList} />
       </div>
       <PaginationBtn
         page={page}
-        limit={limit}
-        totalNum={problems.length}
+        limit={15}
+        totalNum={data.total}
         onPageChange={pageChangeHandler}
       />
     </div>
@@ -75,13 +86,13 @@ function ProblemList() {
 export default ProblemList;
 
 const selectList = [
-  { id: 0, label: "정렬 방식" },
-  { id: 1, label: "도전중인 문제" },
-  { id: 2, label: "안푼 문제" },
-  { id: 3, label: "쉬운 순" },
-  { id: 4, label: "어려운 순" },
-  { id: 5, label: "도전자 많은 순" },
-  { id: 6, label: "도전자 적은 순" },
+  { type: "unsolved_by_HUFS", label: "정렬 방식" },
+  { type: "try", label: "도전중인 문제" },
+  { type: "not_try", label: "안푼 문제" },
+  { type: "problem_list_ordered_by_lev", label: "쉬운 순" },
+  { type: "problem_list_ordered_by_lev_desc", label: "어려운 순" },
+  { type: "problem_list_ordered_by_challengers_desc", label: "도전자 많은 순" },
+  { type: "problem_list_ordered_by_challengers", label: "도전자 적은 순" },
 ];
 
 const columnList = [
