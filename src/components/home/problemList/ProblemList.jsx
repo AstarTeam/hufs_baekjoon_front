@@ -8,9 +8,7 @@ import Button from "../../home/button/Button";
 import LevelIcon from "../levelIcon/LevelIcon";
 import styles from "./problemList.module.css";
 import Loading from "../../common/loading/Loading";
-{
-  "proxy":"43.201.190.128";.
-}
+
 async function getProblemList(page, type, num) {
   const url = `/data/problems${page - 1}.json`; //sampleUrl
   // const url = `/${type}/?page=${page - 1}&size=15`;
