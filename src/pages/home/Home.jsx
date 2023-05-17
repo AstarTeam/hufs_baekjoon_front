@@ -24,7 +24,7 @@ function Home() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h2 className={`${styles.title} ${styles["max-width"]}`}>
         외대 백준 순위 현황
       </h2>
@@ -34,7 +34,7 @@ function Home() {
         <PersonRankList />
         <ProblemList />
       </div>
-    </div>
+    </main>
   );
 }
 
