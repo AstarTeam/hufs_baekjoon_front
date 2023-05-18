@@ -2,7 +2,7 @@ import React from "react";
 import { useTable } from "react-table";
 import styles from "./table.module.css";
 
-function Table({ dataList, columnList }) {
+function Table({ dataList, columnList, type }) {
   const data = React.useMemo(() => dataList, [dataList]);
   const columns = React.useMemo(() => columnList, [columnList]);
 
@@ -10,7 +10,7 @@ function Table({ dataList, columnList }) {
     useTable({ columns, data });
 
   return (
-    <table {...getTableProps()} className={styles.table}>
+    <table {...getTableProps()} className={`${styles.table} ${styles[type]}`}>
       <thead>
         {headerGroups.map((headerGroup, index) => (
           <tr {...headerGroup.getHeaderGroupProps()} key={index}>

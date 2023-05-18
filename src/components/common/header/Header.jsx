@@ -14,28 +14,31 @@ function Header() {
   return (
     <header className={styles.header}>
       <div className={styles["text-wrapper"]}>
-        <p className={styles["text-logo-container"]}>
+        <div className={styles["text-logo-container"]}>
           <Link to="/">
             <img className={styles.logo} src={logo} alt="로고" />
           </Link>
-          <p className={styles["text-container"]}>
-            <p className={`${styles[homeColor]} ${styles.text}`}>
-              <Link to="/">HOME</Link>
-            </p>
-            <p className={`${styles[mypageColor]} ${styles.text}`}>
-              <Link to="/mypage">마이페이지</Link>
-            </p>
-          </p>
-        </p>
-        <p className={styles["text-container-right"]}>
-          <p className={`${styles[joinColor]} ${styles.text}`}>
-            <Link to="join">회원가입</Link>
-          </p>
-          <p className={styles.text}>|</p>
-          <p className={`${styles[loginColor]} ${styles.text}`}>
-            <Link to="/login">로그인</Link>
-          </p>
-        </p>
+          <div className={styles["text-container"]}>
+            <Link to="/" className={`${styles[homeColor]} ${styles.text}`}>
+              HOME
+            </Link>
+            <Link
+              to="/mypage"
+              className={`${styles[mypageColor]} ${styles.text}`}
+            >
+              마이페이지
+            </Link>
+          </div>
+        </div>
+        <div className={styles["text-container-right"]}>
+          <Link to="join" className={`${styles[joinColor]} ${styles.text}`}>
+            회원가입
+          </Link>
+          <span className={styles.text}>|</span>
+          <Link to="/login" className={`${styles[loginColor]} ${styles.text}`}>
+            로그인
+          </Link>
+        </div>
       </div>
     </header>
   );

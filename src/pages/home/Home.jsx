@@ -5,6 +5,8 @@ import Banner from "../../components/home/banner/Banner";
 import RankBox from "../../components/home/rankBox/RankBox";
 import ProblemList from "../../components/home/problemList/ProblemList";
 import styles from "./home.module.css";
+import Loading from "../../components/common/loading/Loading";
+import PersonRankList from "../../components/home/personRankList/PersonRankList";
 
 async function getRankData() {
   const res = await axios(`/data/rank.json`);
@@ -18,20 +20,21 @@ function Home() {
     data: rank,
   } = useQuery(["rank"], getRankData, { staleTime: 1000 * 60 * 5 });
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
   if (error) return <p>{error}</p>;
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <h2 className={`${styles.title} ${styles["max-width"]}`}>
         외대 백준 순위 현황
       </h2>
       <Banner rank={rank} />
       <div className={`${styles["contents-wrapper"]} ${styles["max-width"]}`}>
         <RankBox rank={rank} />
+        <PersonRankList />
         <ProblemList />
       </div>
-    </div>
+    </main>
   );
 }
 
