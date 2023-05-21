@@ -1,0 +1,17 @@
+.container {
+  margin: 5rem auto;
+  padding: 0 2rem;
+  max-width: 120rem;
+}
+
+.title {
+  padding: 0 0 1.5rem 1rem;
+  font-size: 2.8rem;
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.wrapper {
+  margin-top: 1.9rem;
+  display: flex;
+}
