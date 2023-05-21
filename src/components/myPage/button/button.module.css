@@ -1,0 +1,27 @@
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-weight: var(--weight-semi-bold);
+  border: 1px solid transparent;
+  font-size: 1.2rem;
+}
+
+.button.blue {
+  background-color: var(--color-white-blue);
+  color: var(--color-blue);
+}
+
+.button.blue:hover {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-blue);
+}
+
+.button.gray {
+  border-color: var(--color-border);
+  color: var(--color-secondary);
+}
+
+.button.gray:hover {
+  background-color: var(--color-tertiary);
+  color: var(--color-white);
+}
