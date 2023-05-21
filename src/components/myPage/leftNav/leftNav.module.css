@@ -1,0 +1,28 @@
+.nav {
+  padding: 3.5rem 1.5rem;
+  height: 50rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  font-size: 1.6rem;
+}
+
+.tab {
+  width: 14.5rem;
+  padding: 1.2rem 0 1rem 1rem;
+  cursor: pointer;
+}
+
+.tab:hover {
+  color: var(--color-main);
+}
+
+.tab.checked {
+  color: var(--color-hufs);
+  font-weight: var(--weight-bold);
+  background-color: var(--color-white-blue);
+  border-radius: 1.5rem;
+}
