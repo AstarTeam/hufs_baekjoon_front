@@ -18,12 +18,6 @@ async function putMyName(newData) {
 }
 
 function MyInfoForm() {
-  const [form, setForm] = useState({
-    user_id: "",
-    user_name: "",
-  });
-  const [checkedName, setCheckedName] = useState(false); //닉네임 중복확인
-
   //기존 나의 정보 받아오기
   const { isLoading, error, data } = useQuery(["myInfo"], getMyInfo, {
     onSuccess: data => setForm({ ...data.myInfo }), //데이터 받아오는 것을 성공하면, state에 저장한다.
@@ -34,6 +28,12 @@ function MyInfoForm() {
   const mutation = useMutation({
     mutationFn: () => putMyName(form),
   });
+
+  const [form, setForm] = useState({
+    user_id: data?.myInfo.user_id ?? "",
+    user_name: data?.myInfo.user_name ?? "",
+  });
+  const [checkedName, setCheckedName] = useState(false); //닉네임 중복확인
 
   const handleChange = e => {
     const { name, value } = e.target;
