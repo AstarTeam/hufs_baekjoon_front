@@ -11,7 +11,7 @@
   align-items: center;
   padding: 10rem 0;
   width: 50rem;
-  height: 65rem;
+  height: 80rem;
   /* background-color: aqua; */
 }
 
@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   width: 40rem;
-  height: 50rem;
+  height: 70rem;
   /* background-color: bisque; */
 }
 
@@ -60,12 +60,30 @@
   /* background-color: yellowgreen; */
 }
 
-.id {
-  width: 27rem;
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  width: 40rem;
+  height: 4rem;
+  /* background-color: lightcoral; */
 }
 
-.email {
-  width: 20rem;
+.id {
+  width: 29rem;
+}
+
+.auth {
+  width: 15rem;
+}
+
+.none {
+  display: none;
+}
+
+.file {
+  line-height: 4rem;
+  font-size: 1.3rem;
 }
 
 .form-button {
@@ -73,9 +91,12 @@
   margin-bottom: 2.5rem;
   width: 40rem;
   height: 4rem;
+  line-height: 4rem;
   font-weight: 800;
   font-size: 1.5rem;
+  text-align: center;
   color: white;
+  cursor: pointer;
   border-radius: 5px;
   background-color: var(--color-tertiary);
   transition: var(--transition-smooth);
@@ -84,8 +105,12 @@
 .form-check-button {
   width: 10rem;
   height: 4rem;
+  cursor: pointer;
   color: var(--color-blue);
-  font-weight: 900;
+  text-align: center;
+  line-height: 4rem;
+  font-size: 1.5rem;
+  font-weight: 600;
   border-radius: 5px;
   background-color: var(--color-white-blue);
 }
