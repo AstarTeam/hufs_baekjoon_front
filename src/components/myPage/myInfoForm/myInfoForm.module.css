@@ -1,4 +1,4 @@
-.content-wrapper {
+.form {
   padding: 2rem 0 2rem 5rem;
 }
 
@@ -17,7 +17,7 @@
   line-height: 3.6rem;
 }
 
-.form {
+.content-wrapper {
   margin: 3rem 0 3rem 3rem;
   display: flex;
   flex-wrap: wrap;
