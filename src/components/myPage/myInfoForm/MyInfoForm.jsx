@@ -1,55 +1,88 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Button from "../button/Button";
 import Loading from "../../common/loading/Loading";
 import styles from "./myInfoForm.module.css";
 
-async function getMyInfo() {
-  console.log("fetching...");
-  const url = "/data/myProfile.json"; //임시 url
-  const res = await axios(url);
+async function getMyInfo(token) {
+  console.log("fetching...", token);
+  // const url = "/data/myProfile.json"; //임시 url
+  const url = "/my-page/read";
+  const res = await axios({
+    url,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(res.data);
   return res.data;
 }
 
-async function putMyName(newData) {
-  const url = "/my_page/update/name/";
-  await axios.put(url, newData);
+async function putMyName(token, user_name) {
+  console.log(user_name);
+  try {
+    const url = `/my-page/update/name?_update_name=${user_name}`;
+    const res = await axios({
+      method: "put",
+      url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(res.data);
+    return res.data.message;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
-function MyInfoForm() {
+async function checkNameDuplicated(nickName) {
+  const url = `/user-create/user-name-check/${nickName}`;
+  const res = await axios(url);
+  console.log(res.data);
+  return res.data.message || res.data.detail;
+}
+
+function MyInfoForm({ userData }) {
   //기존 나의 정보 받아오기
-  const { isLoading, error, data } = useQuery(["myInfo"], getMyInfo, {
-    onSuccess: data => setForm({ ...data.myInfo }), //데이터 받아오는 것을 성공하면, state에 저장한다.
-    staleTime: 1000 * 60 * 5,
-  }); //로그인 key 추가 필요
+  const client = useQueryClient();
+  const { isLoading, error, data } = useQuery(
+    ["myInfo", userData.access_token],
+    () => getMyInfo(userData.access_token),
+    {
+      onSuccess: data => setNickName(data.user_name), //데이터 받아오는 것을 성공하면, state에 저장한다.
+      staleTime: 1000 * 60 * 5,
+    }
+  ); //로그인 key 추가 필요
 
-  //새로운 닉네임 업데이트
-  const mutation = useMutation({
-    mutationFn: () => putMyName(form),
-  });
-
-  const [form, setForm] = useState({
-    user_id: data?.myInfo.user_id ?? "",
-    user_name: data?.myInfo.user_name ?? "",
-  });
+  const [nickName, setNickName] = useState(data?.user_name ?? "");
   const [checkedName, setCheckedName] = useState(false); //닉네임 중복확인
 
-  const handleChange = e => {
-    const { name, value } = e.target;
-    setForm(form => ({ ...form, [name]: value }));
+  console.log(nickName);
+  const handleChange = e => setNickName(e.target.value);
+
+  const handleDuplicatedNickName = async () => {
+    const message = await checkNameDuplicated();
+    alert(message);
+    if (message === "사용 가능한 이름입니다.") {
+      setCheckedName(true);
+    } else {
+      setCheckedName(false);
+    }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!checkedName) {
       alert("닉네임 중복확인을 해주세요💥");
       return;
     }
-    mutation.mutate(form);
+    const message = await putMyName(userData.access_token, nickName);
+    alert(message);
+    setCheckedName(false);
+    client.invalidateQueries(["myInfo", userData.access_token]);
   };
-
-  console.log(form);
 
   if (isLoading) return <Loading />;
   if (error) return <p>{error}</p>;
@@ -67,7 +100,7 @@ function MyInfoForm() {
             <input
               id="user_id"
               type="text"
-              value={data.myInfo.user_id ?? ""}
+              value={data.user_id ?? ""}
               disabled
             />
           </div>
@@ -76,7 +109,7 @@ function MyInfoForm() {
             <input
               id="baekjoon_id"
               type="text"
-              value={data.myInfo.baekjoon_id ?? ""}
+              value={data.user_baekjoon_id ?? ""}
               disabled
             />
           </div>
@@ -87,7 +120,7 @@ function MyInfoForm() {
             <input
               id="count"
               type="text"
-              value={data.myInfo.count ?? ""}
+              value={data.user_solved_count ?? ""}
               disabled
             />
           </div>
@@ -96,7 +129,7 @@ function MyInfoForm() {
             <input
               id="rank"
               type="text"
-              value={data.myInfo.rank ?? ""}
+              value={data.user_rank ?? ""}
               disabled
             />
           </div>
@@ -107,13 +140,17 @@ function MyInfoForm() {
             id="user_name"
             name="user_name"
             type="text"
-            value={form?.user_name}
+            value={nickName}
             onChange={handleChange}
             minLength={2}
             maxLength={10}
             required
           />
-          <Button label="중복 확인" color="gray" />
+          <Button
+            label="중복 확인"
+            color="gray"
+            onClick={handleDuplicatedNickName}
+          />
         </div>
       </div>
     </form>
