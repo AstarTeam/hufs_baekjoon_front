@@ -50,6 +50,13 @@
   color: var(--color-secondary);
 }
 
+.error {
+  margin-bottom: 1rem;
+  color: var(--color-red);
+  font-size: 1.2rem;
+  font-weight: var(--weight-semi-bold);
+}
+
 .form-input {
   margin-bottom: 1rem;
   padding-left: 1rem;
