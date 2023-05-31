@@ -3,13 +3,35 @@ import styles from "./certificate.module.css";
 import Button from "../button/Button";
 import axios from "axios";
 
-async function getRandomNum() {
-  const url = "/data/randomNum.json";
-  const res = await axios(url);
-  return res.data.random_num.num;
+async function getRandomNum(token, userId) {
+  console.log(token, userId);
+  const url = `/my-page/rand/${userId}`;
+  // const url = "/data/randomNum.json"; 임시 url
+  const res = await axios({
+    url,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(res.data);
+  return res.data.rand;
 }
 
-function CertificateForm() {
+async function postCertificationForm(token, form) {
+  const url = `/my-page/auth?boj_id=${form.baekjoon_id}`;
+  const res = await axios({
+    method: "post",
+    url,
+    data: { file: form.file },
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res.data.message;
+}
+
+function CertificateForm({ userData }) {
   const selectFile = useRef("");
   const [randomNum, setRandomNum] = useState("");
   const [form, setForm] = useState({
@@ -17,7 +39,9 @@ function CertificateForm() {
     file: "",
   });
 
-  const imageInputHandler = e => selectFile.current.click(); //input file를 동작하도록
+  console.log(form.file);
+
+  const imageInputHandler = () => selectFile.current.click(); //input file를 동작하도록
   const handleChange = e => {
     const { name, value } = e.target;
     if (name === "file") {
@@ -28,12 +52,18 @@ function CertificateForm() {
   };
 
   const handleRandomNumBtn = async () => {
-    const res = await getRandomNum();
+    const res = await getRandomNum(userData.access_token, userData.user_id);
     setRandomNum(res);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    if (!randomNum) {
+      alert("난수를 생성해 주세요.");
+      return;
+    }
+    const message = await postCertificationForm(userData.access_token, form);
+    alert(`${message} 인증은 매일 오후 10시에 확인할 수 있습니다.`);
   };
 
   return (
@@ -65,7 +95,7 @@ function CertificateForm() {
             type="file"
             name="file"
             alt="인증 사진"
-            accept=".jpg"
+            accept="image/*"
             ref={selectFile}
             onChange={handleChange}
             className={styles["image-input"]}
