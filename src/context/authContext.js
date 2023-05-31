@@ -1,13 +1,14 @@
-import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import qs from "qs";
 import { postLogin } from "../api/auth";
+import Loading from "../components/common/loading/Loading";
 
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoding] = useState();
+
   const navigate = useNavigate();
   useEffect(() => {
     //로그인 세션이 남아있으면, 해당 user정보를 state에 저장
@@ -19,13 +20,23 @@ export function AuthContextProvider({ children }) {
 
   //로그인 함수
   const handleLogin = async data => {
+    setIsLoding(true);
     const userData = await postLogin(data);
-    sessionStorage.setItem("userData", JSON.stringify(userData));
-    setTimeout(() => navigate("/"), 300);
+    if (userData) {
+      setUserData(userData);
+      sessionStorage.setItem("userData", JSON.stringify(userData));
+      setIsLoding(false);
+      setTimeout(() => navigate("/"), 300);
+    }
   };
 
   //로그아웃 함수
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    sessionStorage.clear();
+    window.location.replace("/");
+  };
+
+  if (isLoading) return <Loading />;
 
   return (
     <AuthContext.Provider
