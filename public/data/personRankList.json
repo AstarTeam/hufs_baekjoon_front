@@ -1,0 +1,14 @@
+{
+  "userList": [
+    { "name": "내가 백준 최고다", "count": 4 },
+    { "name": "외대 최강", "count": 2 },
+    { "name": "노어 23학번", "count": 2 },
+    { "name": "하하", "count": 1 },
+    { "name": "안녕하세요", "count": 3 },
+    { "name": "백준 왕초보", "count": 4 },
+    { "name": "미컴 12", "count": 5 },
+    { "name": "외대짱", "count": 4 },
+    { "name": "여름", "count": 8 },
+    { "name": "안녕", "count": 12 }
+  ]
+}
