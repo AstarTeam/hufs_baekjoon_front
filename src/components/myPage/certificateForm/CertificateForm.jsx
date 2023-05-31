@@ -1,35 +1,7 @@
 import React, { useRef, useState } from "react";
 import styles from "./certificate.module.css";
 import Button from "../button/Button";
-import axios from "axios";
-
-async function getRandomNum(token, userId) {
-  console.log(token, userId);
-  const url = `/my-page/rand/${userId}`;
-  // const url = "/data/randomNum.json"; 임시 url
-  const res = await axios({
-    url,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  console.log(res.data);
-  return res.data.rand;
-}
-
-async function postCertificationForm(token, form) {
-  const url = `/my-page/auth?boj_id=${form.baekjoon_id}`;
-  const res = await axios({
-    method: "post",
-    url,
-    data: { file: form.file },
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return res.data.message;
-}
+import { getRandomNum, postCertificationForm } from "../../../api/myPage";
 
 function CertificateForm({ userData }) {
   const selectFile = useRef("");

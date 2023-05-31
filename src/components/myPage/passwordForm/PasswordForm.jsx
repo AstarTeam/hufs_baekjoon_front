@@ -1,24 +1,7 @@
 import React, { useState } from "react";
-import styles from "./passwordForm.module.css";
+import { putPassword } from "../../../api/myPage";
 import Button from "../button/Button";
-import axios from "axios";
-
-async function putPassword(token, newPassword) {
-  try {
-    const url = `/my-page/update/password?_update_pw=${newPassword}`;
-    const res = await axios({
-      method: "put",
-      url,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(res.data);
-    return res.data.message;
-  } catch (e) {
-    console.log(e);
-  }
-}
+import styles from "./passwordForm.module.css";
 
 function PasswordForm({ userData }) {
   const initialValue = {

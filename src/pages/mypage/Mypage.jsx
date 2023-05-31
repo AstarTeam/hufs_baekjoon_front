@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styles from "./myPage.module.css";
+import { useAuthContext } from "../../context/authContext";
 import LeftNav from "../../components/myPage/leftNav/LeftNav";
 import MyInfoForm from "../../components/myPage/myInfoForm/MyInfoForm";
 import PasswordForm from "../../components/myPage/passwordForm/PasswordForm";
 import CertificateForm from "../../components/myPage/certificateForm/CertificateForm";
-import { useAuthContext } from "../../context/authContext";
+import styles from "./myPage.module.css";
 
 function Mypage() {
   const [checkedNav, setCheckedNav] = useState("myInfo");

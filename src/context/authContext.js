@@ -2,6 +2,7 @@ import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import qs from "qs";
+import { postLogin } from "../api/auth";
 
 const AuthContext = createContext();
 
@@ -9,7 +10,7 @@ export function AuthContextProvider({ children }) {
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
-    //로그인 세션이 남아있으면, 해당 user정보를 state에 저장 필요
+    //로그인 세션이 남아있으면, 해당 user정보를 state에 저장
     setUserData({
       ...JSON.parse(sessionStorage.getItem("userData")),
     });
@@ -18,25 +19,9 @@ export function AuthContextProvider({ children }) {
 
   //로그인 함수
   const handleLogin = async data => {
-    try {
-      const res = await axios({
-        method: "POST",
-        url: "/login",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded", // x-www-form-urlencoded 타입 선언
-        },
-        data: qs.stringify(data),
-      });
-      console.log(res.data);
-      if (res.data.access_token) {
-        setUserData({ ...res.data });
-        sessionStorage.setItem("userData", JSON.stringify(res.data));
-      }
-      setTimeout(() => navigate("/"), 500);
-    } catch (e) {
-      console.log(e);
-      alert("로그인 실패");
-    }
+    const userData = await postLogin(data);
+    sessionStorage.setItem("userData", JSON.stringify(userData));
+    setTimeout(() => navigate("/"), 300);
   };
 
   //로그아웃 함수

@@ -1,20 +1,10 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { getRankList } from "../../../api/home";
 import Table from "../../common/table/Table";
-import Loading from "../../common/loading/Loading";
 import hufsRank from "../../../assets/icons/hufs_rank.svg";
+import Loading from "../../common/loading/Loading";
 import styles from "./personRankList.module.css";
-
-async function getRankList() {
-  const url = "/fame";
-  const res = await axios(url);
-
-  const sortedData = res.data.userList
-    .sort((a, b) => b.count - a.count)
-    .map((item, index) => ({ ...item, rank: index + 1 }));
-  return sortedData;
-}
 
 function PersonRankList() {
   const {
@@ -65,18 +55,3 @@ const columnList = [
   { Header: "닉네임", accessor: "name" },
   { Header: "푼 문제 수", accessor: "count" },
 ];
-
-// const dummyData1 = [
-//   { rank: 1, name: "내가 백준 최고다", count: 4 },
-//   { rank: 2, name: "외대 최강", count: 2 },
-//   { rank: 3, name: "노어 23학번", count: 2 },
-//   { rank: 4, name: "하하", count: 1 },
-//   { rank: 5, name: "안녕하세요", count: 1 },
-// ];
-// const dummyData2 = [
-//   { rank: 6, name: "백준 왕초보", count: 1 },
-//   { rank: 7, name: "미컴 12", count: 1 },
-//   { rank: 8, name: "외대짱", count: 1 },
-//   { rank: 9, name: "여름", count: 1 },
-//   { rank: 10, name: "안녕", count: 1 },
-// ];

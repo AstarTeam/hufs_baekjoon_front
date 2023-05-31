@@ -1,8 +1,12 @@
 import React from "react";
-import styles from "./join.module.css";
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {
+  checkDuplicatedId,
+  checkDuplicatedNickName,
+  postJoin,
+} from "../../api/auth";
+import styles from "./join.module.css";
 
 function Join() {
   /// 폼 state 관리
@@ -21,33 +25,41 @@ function Join() {
   const [isDuplicatedId, setIsDuplicatedId] = useState(false);
   const [isDuplicatedNickname, setIsDuplicatedNickname] = useState(false);
 
-  const checkDuplicatedId = async () => {
+  const navigate = useNavigate();
+
+  const checkId = async () => {
     if (isId) {
-      try {
-        const res = await axios(`/user-create/user-id-check/${id}`);
-        console.log(res);
+      const message = await checkDuplicatedId(id);
+      if (message) {
         setIsDuplicatedId(true);
-        alert(res.data.message); //'사용 가능한 아이디입니다' - 이미 존재하는 경우 처리를 회원가입후 봐야함.
-      } catch (e) {
-        alert("이미 존재하는 아이디입니다."); //수정 필요
+        alert(message);
       }
     } else {
       alert("유효하지 않은 아이디입니다");
     }
   };
 
-  const checkDuplicatedNickname = async () => {
+  const checkNickname = async () => {
     if (isNickname) {
-      try {
-        const res = await axios(`/user-create/user-name-check/${nickname}`);
-        console.log(res);
+      const message = await checkDuplicatedNickName(id);
+      if (message) {
         setIsDuplicatedNickname(true);
-        alert(res.data.message);
-      } catch (e) {
-        alert("이미 존재하는 닉네임입니다.");
+        alert(message);
       }
     } else {
       alert("유효하지 않은 닉네임입니다");
+    }
+  };
+
+  const sendForm = async e => {
+    e.preventDefault();
+    //서버에 회원가입 폼을 전달
+    if (checkForm()) {
+      const message = await postJoin(id, password, nickname);
+      if (message) {
+        alert(message);
+        setTimeout(() => navigate("/"), 500);
+      }
     }
   };
 
@@ -121,30 +133,6 @@ function Join() {
     } else return true;
   }
 
-  const navigate = useNavigate();
-  const sendForm = async e => {
-    e.preventDefault();
-    //서버에 회원가입 폼을 전달
-    if (checkForm()) {
-      try {
-        const res = await axios({
-          method: "post",
-          url: "/user-create/join",
-          data: {
-            user_id: id,
-            user_pw: password,
-            user_name: nickname,
-          },
-        });
-        alert(`${res.data.message} 매일 오후 10시에 회원가입이 승인됩니다.`); //회원가입은 바로 됩니다! 백준 승인을 하라고 해주시면 될것 같아요
-        setTimeout(() => navigate("/"), 500);
-      } catch (e) {
-        console.log(e);
-        alert("회원 가입 실패");
-      }
-    }
-  };
-
   return (
     <div className={styles["join-wrapper"]} onSubmit={sendForm}>
       <div className={styles["title-form-container"]}>
@@ -164,10 +152,7 @@ function Join() {
               maxLength={12}
               required
             />
-            <div
-              className={styles["form-check-button"]}
-              onClick={checkDuplicatedId}
-            >
+            <div className={styles["form-check-button"]} onClick={checkId}>
               중복확인
             </div>
           </div>
@@ -189,7 +174,7 @@ function Join() {
             />
             <div
               className={styles["form-check-button"]}
-              onClick={checkDuplicatedNickname}
+              onClick={checkNickname}
             >
               중복확인
             </div>

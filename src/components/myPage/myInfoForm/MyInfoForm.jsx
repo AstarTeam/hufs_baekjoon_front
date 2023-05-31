@@ -1,48 +1,10 @@
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { getMyInfo, putMyName } from "../../../api/myPage";
+import { checkDuplicatedNickName } from "../../../api/auth";
 import Button from "../button/Button";
 import Loading from "../../common/loading/Loading";
 import styles from "./myInfoForm.module.css";
-
-async function getMyInfo(token) {
-  console.log("fetching...", token);
-  // const url = "/data/myProfile.json"; //임시 url
-  const url = "/my-page/read";
-  const res = await axios({
-    url,
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  console.log(res.data);
-  return res.data;
-}
-
-async function putMyName(token, user_name) {
-  console.log(user_name);
-  try {
-    const url = `/my-page/update/name?_update_name=${user_name}`;
-    const res = await axios({
-      method: "put",
-      url,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log(res.data);
-    return res.data.message;
-  } catch (e) {
-    console.log(e);
-  }
-}
-
-async function checkNameDuplicated(nickName) {
-  const url = `/user-create/user-name-check/${nickName}`;
-  const res = await axios(url);
-  console.log(res.data);
-  return res.data.message || res.data.detail;
-}
 
 function MyInfoForm({ userData }) {
   //기존 나의 정보 받아오기
@@ -54,19 +16,18 @@ function MyInfoForm({ userData }) {
       onSuccess: data => setNickName(data.user_name), //데이터 받아오는 것을 성공하면, state에 저장한다.
       staleTime: 1000 * 60 * 5,
     }
-  ); //로그인 key 추가 필요
+  );
 
   const [nickName, setNickName] = useState(data?.user_name ?? "");
   const [checkedName, setCheckedName] = useState(false); //닉네임 중복확인
 
-  console.log(nickName);
   const handleChange = e => setNickName(e.target.value);
 
   const handleDuplicatedNickName = async () => {
-    const message = await checkNameDuplicated();
-    alert(message);
-    if (message === "사용 가능한 이름입니다.") {
+    const message = await checkDuplicatedNickName(nickName);
+    if (message) {
       setCheckedName(true);
+      alert(message);
     } else {
       setCheckedName(false);
     }
