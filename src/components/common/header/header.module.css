@@ -27,14 +27,12 @@
   margin-top: 0.5rem;
   width: 14rem;
   margin-left: 3rem;
-  /* background-color: aqua; */
 }
 
 .text-container-right {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   margin-top: 0.5rem;
-  width: 12rem;
   margin-left: 3rem;
 }
 
@@ -49,6 +47,7 @@
   margin: 0 3rem;
   width: 100%;
 }
+
 .blue {
   color: var(--color-blue);
 }
