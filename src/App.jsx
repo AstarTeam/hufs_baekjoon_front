@@ -5,22 +5,25 @@ import Home from "./pages/home/Home";
 import Join from "./pages/join/Join";
 import Login from "./pages/login/Login";
 import Mypage from "./pages/mypage/Mypage";
+import { AuthContextProvider } from "./context/authContext";
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/mypage" element={<Mypage />} />
-        </Route>
-        <Route path="/*" element={<p>Error</p>} />
-      </Routes>
-    </QueryClientProvider>
+    <AuthContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/join" element={<Join />} />
+            <Route path="/mypage" element={<Mypage />} />
+          </Route>
+          <Route path="/*" element={<p>Error</p>} />
+        </Routes>
+      </QueryClientProvider>
+    </AuthContextProvider>
   );
 }
 

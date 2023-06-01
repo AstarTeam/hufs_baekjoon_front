@@ -1,5 +1,6 @@
 .form {
-  padding: 2rem 0 2rem 5rem;
+  width: 100%;
+  padding: 2rem 5rem 2rem 5rem;
 }
 
 .title-wrapper {
@@ -56,4 +57,41 @@
 
 .input input:disabled {
   background-color: var(--color-bright-grey);
+}
+
+.alert {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 2rem;
+  font-size: 1.6rem;
+  background-color: var(--color-white-blue);
+  position: relative;
+  animation: fadeInDown 1s;
+}
+
+.alert.green {
+  background-color: rgb(226, 250, 211);
+}
+
+.alert.red {
+  background-color: rgb(255, 211, 211);
+}
+
+.question {
+  margin: 2rem 0 0 2rem;
+  background-color: var(--color-tertiary);
+  color: var(--color-white);
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  cursor: default;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
 }

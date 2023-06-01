@@ -1,15 +1,9 @@
 import React, { useRef, useState } from "react";
 import styles from "./certificate.module.css";
 import Button from "../button/Button";
-import axios from "axios";
+import { getRandomNum, postCertificationForm } from "../../../api/myPage";
 
-async function getRandomNum() {
-  const url = "/data/randomNum.json";
-  const res = await axios(url);
-  return res.data.random_num.num;
-}
-
-function CertificateForm() {
+function CertificateForm({ userData }) {
   const selectFile = useRef("");
   const [randomNum, setRandomNum] = useState("");
   const [form, setForm] = useState({
@@ -17,7 +11,7 @@ function CertificateForm() {
     file: "",
   });
 
-  const imageInputHandler = e => selectFile.current.click(); //input file를 동작하도록
+  const imageInputHandler = () => selectFile.current.click(); //input file를 동작하도록
   const handleChange = e => {
     const { name, value } = e.target;
     if (name === "file") {
@@ -28,16 +22,44 @@ function CertificateForm() {
   };
 
   const handleRandomNumBtn = async () => {
-    const res = await getRandomNum();
+    const res = await getRandomNum(userData.access_token, userData.user_id);
     setRandomNum(res);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    if (!randomNum) {
+      alert("난수를 생성해 주세요.");
+      return;
+    }
+    const message = await postCertificationForm(userData.access_token, form);
+    alert(`${message} 인증은 매일 오후 10시에 확인할 수 있습니다.`);
   };
+
+  let alertContent;
+  if (userData.user_auth === 2) {
+    alertContent = (
+      <p className={styles.alert}>
+        * 인증이 신청되었습니다. 매일 오후 10시에 업데이트 됩니다.
+      </p>
+    );
+  } else if (userData.user_auth === 1) {
+    alertContent = (
+      <p className={`${styles.alert} ${styles.green}`}>
+        * 인증 완료된 사용자 입니다.
+      </p>
+    );
+  } else {
+    alertContent = (
+      <p className={`${styles.alert} ${styles.red}`}>
+        * 백준 인증이 필요한 사용자 입니다.
+      </p>
+    );
+  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      {alertContent}
       <div className={styles["title-wrapper"]}>
         <h3 className={styles["content-title"]}>백준 아이디 인증</h3>
         <Button type="submit" label="인증 제출" color="blue" />
@@ -65,7 +87,7 @@ function CertificateForm() {
             type="file"
             name="file"
             alt="인증 사진"
-            accept=".jpg"
+            accept="image/*"
             ref={selectFile}
             onChange={handleChange}
             className={styles["image-input"]}
@@ -74,6 +96,9 @@ function CertificateForm() {
           <Button label="사진 선택" color="gray" onClick={imageInputHandler} />
         </div>
       </div>
+      <button type="button" className={styles.question}>
+        백준 인증이란?
+      </button>
     </form>
   );
 }

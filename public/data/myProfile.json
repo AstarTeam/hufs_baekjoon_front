@@ -1,9 +1,7 @@
 {
-  "myInfo": {
-    "user_id": "gildong",
-    "baekjoon_id": "gildong",
-    "count": 3,
-    "rank": 1,
-    "user_name": "알고리즘 대왕"
-  }
+  "user_id": "user1_id",
+  "user_name": "user1_id",
+  "user_solved_count": 2,
+  "user_rank": 2,
+  "user_baekjoon_id": "user1_id"
 }

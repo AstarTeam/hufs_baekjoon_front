@@ -1,20 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import { getProblemList } from "../../../api/home";
 import Table from "../../common/table/Table";
 import PaginationBtn from "../../common/paginationBtn/PaginationBtn";
 import SelectBox from "../../common/selectBox/SelectBox";
 import Button from "../../home/button/Button";
 import LevelIcon from "../levelIcon/LevelIcon";
-import styles from "./problemList.module.css";
 import Loading from "../../common/loading/Loading";
-
-async function getProblemList(page, type, num) {
-  const url = `/data/problems${page - 1}.json`; //sampleUrl
-  // const url = `/${type}/?page=${page - 1}&size=15`;
-  const res = await axios(url);
-  return res.data;
-}
+import styles from "./problemList.module.css";
 
 function ProblemList() {
   const [page, setPage] = useState(1);
@@ -90,13 +83,13 @@ function ProblemList() {
 export default ProblemList;
 
 const selectList = [
-  { type: "unsolved_by_HUFS", label: "정렬 방식" },
+  { type: "unsolved-by-HUFS", label: "정렬 방식" },
   { type: "try", label: "도전중인 문제" },
-  { type: "not_try", label: "안푼 문제" },
-  { type: "problem_list_ordered_by_lev", label: "쉬운 순" },
-  { type: "problem_list_ordered_by_lev_desc", label: "어려운 순" },
-  { type: "problem_list_ordered_by_challengers_desc", label: "도전자 많은 순" },
-  { type: "problem_list_ordered_by_challengers", label: "도전자 적은 순" },
+  { type: "not-try", label: "안푼 문제" },
+  { type: "problem-list-ordered-by-lev", label: "쉬운 순" },
+  { type: "problem-list-ordered-by-lev-desc", label: "어려운 순" },
+  { type: "problem-list-ordered-by-challengers-desc", label: "도전자 많은 순" },
+  { type: "problem-list-ordered-by-challengers", label: "도전자 적은 순" },
 ];
 
 const columnList = [
