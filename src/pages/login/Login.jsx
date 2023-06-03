@@ -17,12 +17,11 @@ function Login() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(form);
     onLogin(form);
   };
 
   return (
-    <div className={styles["login-wrapper"]} onSubmit={handleSubmit}>
+    <div className={styles.container} onSubmit={handleSubmit}>
       <form className={styles["form-container"]}>
         <h2 className={styles.title}>LOGIN</h2>
         <p className={styles.subtitle}>아이디와 비밀번호를 입력해주세요.</p>
@@ -45,11 +44,11 @@ function Login() {
           로그인
         </button>
         <div className={styles["text-container"]}>
-          <Link to="/" className={styles.text}>
+          <Link to="/" className={styles.link}>
             Home
           </Link>
           <span className={styles.text}>|</span>
-          <Link to="/join" className={styles.text}>
+          <Link to="/join" className={styles.link}>
             회원가입
           </Link>
         </div>

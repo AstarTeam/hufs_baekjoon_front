@@ -17,6 +17,7 @@ export async function postLogin(data) {
     }
   } catch (e) {
     alert(e.response.data.detail);
+    console.error(e);
   }
 }
 
@@ -32,12 +33,12 @@ export async function checkDuplicatedId(id) {
 
 //닉네임 중복 확인
 export async function checkDuplicatedNickName(nickname) {
-  console.log(nickname);
   try {
     const res = await axios(`/user-create/user-name-check/${nickname}`);
     return res.data.message;
   } catch (e) {
     alert(e.response.data.detail);
+    console.error(e);
   }
 }
 

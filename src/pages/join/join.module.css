@@ -12,7 +12,6 @@
   padding: 10rem 0;
   width: 50rem;
   height: 80rem;
-  /* background-color: aqua; */
 }
 
 .form-container {
@@ -20,7 +19,6 @@
   flex-direction: column;
   width: 40rem;
   height: 70rem;
-  /* background-color: bisque; */
 }
 
 .title {
@@ -31,7 +29,6 @@
   font-weight: 600;
   text-align: center;
   color: var(--color-gold);
-  /* background-color: beige; */
 }
 
 .subtitle {
@@ -39,9 +36,7 @@
   width: 40rem;
   text-align: center;
   font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  /* background-color: greenyellow; */
+  color: var(--color-secondary);
 }
 
 .label {
@@ -50,11 +45,17 @@
   color: var(--color-secondary);
 }
 
-.error {
+.error,
+.correct {
   margin-bottom: 1rem;
   color: var(--color-red);
   font-size: 1.2rem;
   font-weight: var(--weight-semi-bold);
+  animation: fadein 0.3s;
+}
+
+.correct {
+  color: var(--color-green);
 }
 
 .form-input {
@@ -64,7 +65,16 @@
   height: 4rem;
   border: 0.1rem solid var(--color-border);
   border-radius: 5px;
-  /* background-color: yellowgreen; */
+}
+
+.form-input:focus {
+  outline: 3px solid var(--color-white-blue);
+  border-color: var(--color-blue);
+}
+
+.form-input::placeholder {
+  color: var(--color-tertiary);
+  font-size: 1.2rem;
 }
 
 .input-container {
@@ -73,7 +83,6 @@
   margin-bottom: 1rem;
   width: 40rem;
   height: 4rem;
-  /* background-color: lightcoral; */
 }
 
 .id {
@@ -122,6 +131,20 @@
   background-color: var(--color-white-blue);
 }
 
+.form-check-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 .form-button:hover {
   background-color: var(--color-secondary);
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

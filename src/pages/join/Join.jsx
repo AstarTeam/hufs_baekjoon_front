@@ -6,6 +6,7 @@ import {
   checkDuplicatedNickName,
   postJoin,
 } from "../../api/auth";
+import Loading from "../../components/common/loading/Loading";
 import styles from "./join.module.css";
 
 function Join() {
@@ -19,57 +20,49 @@ function Join() {
   const [isId, setIsId] = useState(false);
   const [isNickname, setIsNickname] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
-  const [isConfirmedPassword, setIsConfirmedPassword] = useState(false);
 
   /// 중복검사
   const [isDuplicatedId, setIsDuplicatedId] = useState(false);
   const [isDuplicatedNickname, setIsDuplicatedNickname] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const checkId = async () => {
-    if (isId) {
-      const message = await checkDuplicatedId(id);
-      if (message) {
-        setIsDuplicatedId(true);
-        alert(message);
-      }
-    } else {
-      alert("유효하지 않은 아이디입니다");
-    }
+    if (!isId) return;
+    const message = await checkDuplicatedId(id);
+    message ? setIsDuplicatedId(true) : setIsDuplicatedId(false);
   };
 
   const checkNickname = async () => {
-    if (isNickname) {
-      const message = await checkDuplicatedNickName(id);
-      if (message) {
-        setIsDuplicatedNickname(true);
-        alert(message);
-      }
-    } else {
-      alert("유효하지 않은 닉네임입니다");
-    }
+    if (!isNickname) return;
+    const message = await checkDuplicatedNickName(nickname);
+    message ? setIsDuplicatedNickname(true) : setIsDuplicatedNickname(false);
   };
 
   const sendForm = async e => {
     e.preventDefault();
-    //서버에 회원가입 폼을 전달
     if (checkForm()) {
-      const message = await postJoin(id, password, nickname);
-      if (message) {
-        alert(message);
-        setTimeout(() => navigate("/"), 500);
+      setIsLoading(true);
+      try {
+        const message = await postJoin(id, password, nickname);
+        if (message) {
+          alert(message);
+          navigate("/login");
+        }
+      } catch (e) {
+        alert("죄송합니다 회원가입에 실패했습니다.");
       }
+      setIsLoading(false);
     }
   };
 
-  /// 폼 onchange 함수 (유효성 검사)
+  // 폼 onchange 함수 (유효성 검사)
   const onChangeId = e => {
     setId(e.target.value);
     setIsDuplicatedId(false);
-    console.log(e.target.value);
-
-    const idExp = /^[a-zA-Z0-9]{2,10}$/;
+    const idExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{2,10}$/;
     if (!idExp.test(e.target.value)) {
       setIsId(false);
     } else {
@@ -80,8 +73,6 @@ function Join() {
   const onChangeNickname = e => {
     setNickname(e.target.value);
     setIsDuplicatedNickname(false);
-    console.log(e.target.value);
-
     const nickNameExp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{2,10}$/;
     if (!nickNameExp.test(e.target.value)) {
       setIsNickname(false);
@@ -92,8 +83,7 @@ function Join() {
 
   const onChangePassword = e => {
     setPassword(e.target.value);
-    console.log(e.target.value);
-    const passwordExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{6,12}$/;
+    const passwordExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/;
     if (!passwordExp.test(e.target.value)) {
       setIsPassword(false);
     } else {
@@ -101,14 +91,7 @@ function Join() {
     }
   };
 
-  const onChangeConfirmedPassword = e => {
-    setConfirmedPassword(e.target.value);
-    if (password !== e.target.value) {
-      setIsConfirmedPassword(false);
-    } else {
-      setIsConfirmedPassword(true);
-    }
-  };
+  const onChangeConfirmedPassword = e => setConfirmedPassword(e.target.value);
 
   /// 폼 데이터 확인
   function checkForm() {
@@ -127,11 +110,13 @@ function Join() {
     } else if (!isPassword) {
       alert("유효한 비밀번호를 입력해주세요");
       return false;
-    } else if (!isConfirmedPassword) {
+    } else if (password !== confirmedPassword) {
       alert("비밀번호가 일치하지 않습니다");
       return false;
     } else return true;
   }
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className={styles["join-wrapper"]} onSubmit={sendForm}>
@@ -147,18 +132,28 @@ function Join() {
               className={`${styles["form-input"]} ${styles.id}`}
               value={id}
               onChange={onChangeId}
-              placeholder="2~10자 이내, 영문, 숫자 조합이어야 합니다."
+              placeholder="2~10자 이내, 1개 이상의 영문 및 숫자 포함 필수"
               minLength={2}
               maxLength={12}
               required
             />
-            <div className={styles["form-check-button"]} onClick={checkId}>
+            <button
+              type="button"
+              className={styles["form-check-button"]}
+              onClick={checkId}
+              disabled={!isId}
+            >
               중복확인
-            </div>
+            </button>
           </div>
           {id !== "" && !isId && (
             <small className={styles.error}>
-              *2~10자 이내의 영어 대소문자, 숫자만 입력해주세요.
+              *2~10자 이내 최소 하나 이상의 영문 및 숫자가 포함되어야 합니다.
+            </small>
+          )}
+          {isDuplicatedId && (
+            <small className={styles.correct}>
+              * 사용가능한 아이디 입니다.
             </small>
           )}
           <label className={styles.label}>닉네임</label>
@@ -167,21 +162,28 @@ function Join() {
               className={`${styles["form-input"]} ${styles.id}`}
               value={nickname}
               onChange={onChangeNickname}
-              placeholder="2~10자 이내여야 합니다."
+              placeholder="2~10자 이내 영문, 숫자, 한글 조합 가능"
               minLength={2}
               maxLength={12}
               required
             />
-            <div
+            <button
+              type="button"
               className={styles["form-check-button"]}
               onClick={checkNickname}
+              disabled={!isNickname}
             >
               중복확인
-            </div>
+            </button>
           </div>
           {nickname !== "" && !isNickname && (
             <small className={styles.error}>
-              *2~10자 이내의 한글,영어 대소문자, 숫자만 입력해주세요.
+              *2~10자 이내 영문, 숫자, 한글 조합만 가능합니다.
+            </small>
+          )}
+          {isDuplicatedNickname && (
+            <small className={styles.correct}>
+              * 사용가능한 닉네임 입니다.
             </small>
           )}
           <label className={styles.label}>비밀번호</label>
@@ -190,12 +192,12 @@ function Join() {
             type="password"
             value={password}
             onChange={onChangePassword}
-            placeholder="최소길이 6문자, 1개 이상의 영문 및 숫자가 포함되어야 합니다."
+            placeholder="최소 6자, 1개 이상의 영문 및 숫자 포함 필수"
             required
           />
           {password !== "" && !isPassword && (
             <small className={styles.error}>
-              *6-12자 이내의 1개 이상의 영문 대소문자 및 숫자를 입력해주세요.
+              *최소 6자, 최소 하나 이상의 영문 및 숫자가 포함되어야 합니다.
             </small>
           )}
           <label className={styles.label}>비밀번호 확인</label>

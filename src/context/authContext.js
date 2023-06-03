@@ -7,7 +7,7 @@ const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [userData, setUserData] = useState({});
-  const [isLoading, setIsLoding] = useState();
+  const [isLoading, setIsLoding] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,9 +25,10 @@ export function AuthContextProvider({ children }) {
     if (userData) {
       setUserData(userData);
       sessionStorage.setItem("userData", JSON.stringify(userData));
-      setIsLoding(false);
-      setTimeout(() => navigate("/"), 300);
+      navigate("/");
     }
+
+    setIsLoding(false);
   };
 
   //로그아웃 함수
