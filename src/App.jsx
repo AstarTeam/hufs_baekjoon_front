@@ -6,6 +6,7 @@ import Join from "./pages/join/Join";
 import Login from "./pages/login/Login";
 import Mypage from "./pages/mypage/Mypage";
 import { AuthContextProvider } from "./context/authContext";
+import Ranking from "./pages/ranking/Ranking";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/join" element={<Join />} />
+            <Route path="/ranking" element={<Ranking />} />
             <Route path="/mypage" element={<Mypage />} />
           </Route>
           <Route path="/*" element={<p>Error</p>} />
