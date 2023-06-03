@@ -15,7 +15,7 @@ function RankBox({ rank }) {
   } = rank;
 
   return (
-    <div className={styles.container}>
+    <div>
       <article className={`${styles.box} ${styles.first}`}>
         <h3 className={styles.title}>
           현재 한국외국어대학교 순위는 <strong>{hufs_rank}</strong>

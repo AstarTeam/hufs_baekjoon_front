@@ -11,12 +11,17 @@
 }
 
 .title {
-  padding: 4rem 0 4rem 2rem;
+  padding: 4rem 0 4rem 3rem;
   font-size: 2.8rem;
   color: var(--color-secondary);
 }
 
+.contents-wrapper {
+  padding: 0 2rem;
+}
+
 .contents-wrapper > div:first-child {
-  max-width: 115rem;
   margin: 5rem auto 6rem;
+  display: flex;
+  justify-content: space-between;
 }

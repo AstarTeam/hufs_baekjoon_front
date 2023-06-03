@@ -9,7 +9,6 @@
 
 .container {
   width: 100%;
-  max-width: 120rem;
+  max-width: 110rem;
   display: flex;
-  justify-content: space-between;
 }
