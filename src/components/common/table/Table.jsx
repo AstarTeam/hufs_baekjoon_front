@@ -35,7 +35,7 @@ function Table({ dataList, columnList, type }) {
                 return (
                   <td
                     {...cell.getCellProps()}
-                    className={styles.td}
+                    className={`${styles.td} txt-ellipsie`}
                     key={index}
                   >
                     {cell.render("Cell")}

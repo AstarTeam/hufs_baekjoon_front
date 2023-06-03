@@ -7,7 +7,7 @@ function BannerBox({ main, rank, name, correct }) {
       <p className={styles.rank}>
         <span>{rank}</span>위
       </p>
-      <strong className={styles.name}>{name}</strong>
+      <strong className={`${styles.name} txt-ellipsie`}>{name}</strong>
       <p className={styles.correct}>맞은 문제 수 : {correct}</p>
     </div>
   );
