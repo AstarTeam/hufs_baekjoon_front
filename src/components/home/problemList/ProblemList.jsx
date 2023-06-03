@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuthContext } from "../../../context/authContext";
-import { getProblemList, postChallenge } from "../../../api/home";
+import {
+  getProblemList,
+  getSearchProblem,
+  postChallenge,
+} from "../../../api/home";
 import Table from "../../common/table/Table";
 import PaginationBtn from "../../common/paginationBtn/PaginationBtn";
 import SelectBox from "../../common/selectBox/SelectBox";
@@ -14,17 +18,29 @@ import SearchInput from "../../common/searchInput/SearchInput";
 function ProblemList() {
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(selectList[0]); //정렬 방법
+  const [searchNum, setSearchNum] = useState(null);
+  const inputRef = useRef();
 
   const { userData } = useAuthContext();
 
-  const { isLoading, error, data } = useQuery(
-    ["problems", page, selected.type],
-    () => getProblemList(page, selected.type, userData?.access_token),
+  const {
+    isLoading,
+    error,
+    data: problemList,
+  } = useQuery(
+    ["problems", page, selected.type, searchNum],
+    () => {
+      if (searchNum) {
+        return getSearchProblem(searchNum, userData?.access_token);
+      } else {
+        return getProblemList(page, selected.type, userData?.access_token);
+      }
+    },
     {
       staleTime: 1000 * 60 * 5,
     }
   );
-  const totalPage = Math.floor(data?.total / 15);
+  const totalPage = Math.floor(problemList?.total / 15);
 
   //prefetch
   const queryClient = useQueryClient();
@@ -35,7 +51,7 @@ function ProblemList() {
         getProblemList(nextPage, selected.type, userData?.access_token)
       );
     }
-  }, [totalPage, page, queryClient, selected.type]);
+  }, [totalPage, page, queryClient, selected.type, userData?.access_token]);
 
   //페이지 버튼 클릭시 리스트 처음으로 스크롤
   const problemListRef = useRef(null);
@@ -51,7 +67,14 @@ function ProblemList() {
 
   const selectChangeHandler = item => {
     setSelected(item);
+    setSearchNum(null);
     setPage(1);
+  };
+
+  //문제 번호 검색
+  const handleSearchSubmit = async e => {
+    e.preventDefault();
+    setSearchNum(prev => inputRef.current.value);
   };
 
   if (isLoading) return <Loading />;
@@ -62,7 +85,7 @@ function ProblemList() {
       <div className={styles["title-wrapper"]}>
         <h3 className={styles["table-title"]}>한국외대 미해결 문제</h3>
         <div className={styles["search-wrapper"]}>
-          <SearchInput />
+          <SearchInput onSubmit={handleSearchSubmit} inputRef={inputRef} />
           <SelectBox
             list={
               !userData.access_token ? selectList : selectList_authenticated
@@ -74,7 +97,7 @@ function ProblemList() {
       </div>
       <div className={styles["table-wrapper"]}>
         <Table
-          dataList={data.problem_list}
+          dataList={problemList.problem_list}
           columnList={columnList}
           type="problemList"
         />
@@ -82,7 +105,7 @@ function ProblemList() {
       <PaginationBtn
         page={page}
         limit={15}
-        totalNum={data.total}
+        totalNum={problemList.total}
         onPageChange={pageChangeHandler}
       />
     </div>
