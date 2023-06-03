@@ -9,6 +9,11 @@
   justify-content: space-between;
 }
 
+.search-wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
 .table-wrapper {
   margin-bottom: 4rem;
 }
