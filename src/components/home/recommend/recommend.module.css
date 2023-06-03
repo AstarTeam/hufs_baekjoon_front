@@ -1,0 +1,16 @@
+.container {
+  margin-bottom: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 2rem;
+  font-size: 2.8rem;
+  color: var(--color-secondary);
+}
+
+.table-wrapper {
+  display: flex;
+}
