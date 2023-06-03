@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getRankList } from "../../../api/home";
+import { getRankList } from "../../../api/ranking";
 import Table from "../../common/table/Table";
 import hufsRank from "../../../assets/icons/hufs_rank.svg";
 import Loading from "../../common/loading/Loading";
