@@ -25,6 +25,7 @@
   border-bottom-color: var(--color-main);
   font-size: 1.6rem;
   line-height: 2.4rem;
+  vertical-align: middle;
 }
 
 .problemList .th:first-child {

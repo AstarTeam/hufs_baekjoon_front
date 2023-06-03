@@ -11,6 +11,7 @@ function Header() {
   const { userData, onLogout } = useAuthContext();
 
   const homeColor = location.pathname === "/" ? "blue" : "";
+  const rankingColor = location.pathname === "/ranking" ? "blue" : "";
   const mypageColor = location.pathname === "/mypage" ? "blue" : "";
   const loginColor = location.pathname === "/login" ? "blue" : "";
   const joinColor = location.pathname === "/join" ? "blue" : "";
@@ -27,17 +28,23 @@ function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={styles["text-wrapper"]}>
+      <div className={styles.wrapper}>
         <div className={styles["text-logo-container"]}>
           <Link to="/">
             <img className={styles.logo} src={logo} alt="로고" />
           </Link>
           <div className={styles["text-container"]}>
-            <Link to="/" className={`${styles[homeColor]} ${styles.text}`}>
+            <Link to="/" className={`${styles[homeColor]} ${styles.link}`}>
               HOME
             </Link>
+            <Link
+              to="/ranking"
+              className={`${styles[rankingColor]} ${styles.link}`}
+            >
+              개인 랭킹
+            </Link>
             <span
-              className={`${styles[mypageColor]} ${styles.text}`}
+              className={`${styles[mypageColor]} ${styles.link}`}
               onClick={handleMyPageClick}
             >
               마이페이지
@@ -49,19 +56,19 @@ function Header() {
             <>
               <div className={styles.text}>{userData.user_id}</div>
               <span className={styles.text}>|</span>
-              <div className={styles.text} onClick={onLogout}>
+              <div className={styles.link} onClick={onLogout}>
                 로그아웃
               </div>
             </>
           ) : (
             <>
-              <Link to="join" className={`${styles[joinColor]} ${styles.text}`}>
+              <Link to="join" className={`${styles[joinColor]} ${styles.link}`}>
                 회원가입
               </Link>
               <span className={styles.text}>|</span>
               <Link
                 to="/login"
-                className={`${styles[loginColor]} ${styles.text}`}
+                className={`${styles[loginColor]} ${styles.link}`}
               >
                 로그인
               </Link>

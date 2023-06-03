@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getRankList } from "../../../api/home";
+import { getRankList } from "../../../api/ranking";
 import Table from "../../common/table/Table";
 import hufsRank from "../../../assets/icons/hufs_rank.svg";
 import Loading from "../../common/loading/Loading";
@@ -22,7 +22,8 @@ function PersonRankList() {
     <div className={styles.container}>
       <img src={hufsRank} alt="HUFS 명예의 전당" />
       <p className={styles.describe}>
-        등수를 높이기 위해 한문제 더 풀어보세요 :)
+        <span>로그인</span> 및 <span>백준 인증</span>을 완료하여 명예의 전당에
+        내 이름을 남겨보세요 :)
       </p>
       <div className={styles["table-wrapper"]}>
         <Table

@@ -6,7 +6,7 @@ import RankBox from "../../components/home/rankBox/RankBox";
 import ProblemList from "../../components/home/problemList/ProblemList";
 import styles from "./home.module.css";
 import Loading from "../../components/common/loading/Loading";
-import PersonRankList from "../../components/home/personRankList/PersonRankList";
+import Recommend from "../../components/home/recommend/Recommend";
 
 async function getRankData() {
   const res = await axios(`/data/rank.json`);
@@ -31,7 +31,7 @@ function Home() {
       <Banner rank={rank} />
       <div className={`${styles["contents-wrapper"]} ${styles["max-width"]}`}>
         <RankBox rank={rank} />
-        <PersonRankList />
+        <Recommend />
         <ProblemList />
       </div>
     </main>
