@@ -1,4 +1,5 @@
 .form {
+  height: 50rem;
   padding: 2rem 0 2rem 5rem;
 }
 
@@ -56,4 +57,12 @@
 
 .input input:disabled {
   background-color: var(--color-bright-grey);
+}
+
+.leave-button {
+  margin-top: 20rem;
+  margin-right: 5rem;
+  float: right;
+  color: var(--color-secondary);
+  font-size: 1.3rem;
 }

@@ -4,6 +4,7 @@
   font-weight: var(--weight-semi-bold);
   border: 1px solid transparent;
   font-size: 1.2rem;
+  transition: var(--transition-smooth);
 }
 
 .button.blue {
