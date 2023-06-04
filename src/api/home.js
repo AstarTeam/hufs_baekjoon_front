@@ -26,7 +26,9 @@ export async function getProblemList(page, type, token) {
 //문제 검색
 export async function getSearchProblem(problem_num, token) {
   try {
-    const url = `search${token ? "/token" : ""}?problem_num=${problem_num}`;
+    const url = `${BASE_URL}/search${
+      token ? "/token" : ""
+    }?problem_num=${problem_num}`;
     const config = token
       ? {
           url,
