@@ -92,3 +92,18 @@ ol {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: var(--color-tertiary);
+
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, 0.1);
+}

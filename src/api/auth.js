@@ -1,12 +1,13 @@
 import axios from "axios";
 import qs from "qs";
+import { BASE_URL } from "../utils/url";
 
 //로그인
 export async function postLogin(data) {
   try {
     const res = await axios({
       method: "POST",
-      url: "/login",
+      url: `${BASE_URL}/login`,
       headers: {
         "Content-Type": "application/x-www-form-urlencoded", // x-www-form-urlencoded 타입 선언
       },
@@ -24,7 +25,7 @@ export async function postLogin(data) {
 //아이디 중복 확인
 export async function checkDuplicatedId(id) {
   try {
-    const res = await axios(`/user-create/user-id-check/${id}`);
+    const res = await axios(`${BASE_URL}/user-create/user-id-check/${id}`);
     return res.data.message;
   } catch (e) {
     alert(e.response.data.detail);
@@ -34,7 +35,9 @@ export async function checkDuplicatedId(id) {
 //닉네임 중복 확인
 export async function checkDuplicatedNickName(nickname) {
   try {
-    const res = await axios(`/user-create/user-name-check/${nickname}`);
+    const res = await axios(
+      `${BASE_URL}/user-create/user-name-check/${nickname}`
+    );
     return res.data.message;
   } catch (e) {
     alert(e.response.data.detail);
@@ -47,7 +50,7 @@ export async function postJoin(id, password, nickname) {
   try {
     const res = await axios({
       method: "post",
-      url: "/user-create/join",
+      url: `${BASE_URL}/user-create/join`,
       data: {
         user_id: id,
         user_pw: password,

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getMyInfo, putMyName } from "../../../api/myPage";
+import { deleteUser, getMyInfo, putMyName } from "../../../api/myPage";
 import { checkDuplicatedNickName } from "../../../api/auth";
 import Button from "../button/Button";
 import Loading from "../../common/loading/Loading";
 import styles from "./myInfoForm.module.css";
+import { useAuthContext } from "../../../context/authContext";
 
-function MyInfoForm({ userData }) {
+function MyInfoForm() {
+  const { userData, onLogout } = useAuthContext();
+
   //기존 나의 정보 받아오기
   const client = useQueryClient();
   const { isLoading, error, data } = useQuery(
@@ -43,6 +46,20 @@ function MyInfoForm({ userData }) {
     alert(message);
     setCheckedName(false);
     client.invalidateQueries(["myInfo", userData.access_token]);
+  };
+
+  const handleDeleteUser = async e => {
+    if (!window.confirm("모든 정보가 삭제됩니다. 정말 탈퇴 하시겠습니까?")) {
+      return;
+    } else {
+      const message = await deleteUser(userData.access_token);
+      if (message) {
+        alert("탈퇴가 완료되었습니다.");
+        onLogout();
+      } else {
+        alert("다시한번 시도해 주세요.");
+      }
+    }
   };
 
   if (isLoading) return <Loading />;
@@ -114,6 +131,13 @@ function MyInfoForm({ userData }) {
           />
         </div>
       </div>
+      <button
+        type="button"
+        className={styles["leave-button"]}
+        onClick={handleDeleteUser}
+      >
+        회원 탈퇴하기
+      </button>
     </form>
   );
 }

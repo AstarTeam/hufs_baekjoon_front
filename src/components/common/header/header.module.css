@@ -30,6 +30,10 @@
   cursor: pointer;
 }
 
+.text {
+  cursor: default;
+}
+
 .link:hover {
   color: var(--color-main);
   transform: var(--translate-smooth);
