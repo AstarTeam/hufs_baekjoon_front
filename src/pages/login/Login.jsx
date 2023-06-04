@@ -29,6 +29,7 @@ function Login() {
           className={styles["form-input"]}
           name="username"
           placeholder="아이디"
+          autoComplete="off"
           onChange={handleChange}
           required
         />

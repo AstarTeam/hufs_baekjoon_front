@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useAuthContext } from "../../../context/authContext";
 import { putPassword } from "../../../api/myPage";
 import Button from "../button/Button";
 import styles from "./passwordForm.module.css";
 
-function PasswordForm({ userData }) {
+function PasswordForm() {
+  const { userData } = useAuthContext();
+
   const initialValue = {
     new_password: "",
     new_password_check: "",

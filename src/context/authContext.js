@@ -37,11 +37,22 @@ export function AuthContextProvider({ children }) {
     window.location.replace("/");
   };
 
+  const updateAuth = () => {
+    const authedData = { ...userData, user_auth: 2 };
+    setUserData(authedData);
+    sessionStorage.setItem("userData", JSON.stringify(authedData));
+  };
+
   if (isLoading) return <Loading />;
 
   return (
     <AuthContext.Provider
-      value={{ userData, onLogin: handleLogin, onLogout: handleLogout }}
+      value={{
+        userData,
+        onLogin: handleLogin,
+        onLogout: handleLogout,
+        updateAuth,
+      }}
     >
       {children}
     </AuthContext.Provider>
