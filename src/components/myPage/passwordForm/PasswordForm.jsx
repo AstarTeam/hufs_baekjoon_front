@@ -3,6 +3,7 @@ import { useAuthContext } from "../../../context/authContext";
 import { putPassword } from "../../../api/myPage";
 import Button from "../button/Button";
 import styles from "./passwordForm.module.css";
+import Loading from "../../common/loading/Loading";
 
 function PasswordForm() {
   const { userData } = useAuthContext();
@@ -12,6 +13,7 @@ function PasswordForm() {
     new_password_check: "",
   };
   const [form, setForm] = useState(initialValue);
+  const [isLoading, setIsLoading] = useState(false);
 
   let wrongPasswordRegexp =
     form.new_password !== "" &&
@@ -26,8 +28,18 @@ function PasswordForm() {
       alert("비밀번호를 확인해 주세요.");
       return;
     }
-    const message = await putPassword(userData.access_token, form.new_password);
-    alert(message);
+
+    try {
+      setIsLoading(true);
+      const message = await putPassword(
+        userData.access_token,
+        form.new_password
+      );
+      alert(message);
+    } catch (e) {
+      alert("비밀번호가 성공적으로 변경되지 못하였습니다. 다시 시도해주세요.");
+    }
+    setIsLoading(false);
     setForm(initialValue);
   };
 
@@ -35,6 +47,8 @@ function PasswordForm() {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
