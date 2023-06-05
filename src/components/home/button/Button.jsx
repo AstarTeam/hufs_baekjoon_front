@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./button.module.css";
 import { useAuthContext } from "../../../context/authContext";
+import { useQueryClient } from "@tanstack/react-query";
 
-function Button({ label, type = "button", onClick, color = "blue" }) {
+function Button({
+  label,
+  type = "button",
+  onClick,
+  color = "blue",
+  state,
+  problemNum,
+}) {
   const { userData } = useAuthContext();
-  const [clicked, setClicked] = useState(color === "blue" ? true : false);
+  const client = useQueryClient();
 
-  const handleButtonToggle = () => setClicked(prev => !prev);
+  const handleButtonToggle = async () => {
+    const message = await onClick(problemNum, userData.access_token, state);
+    if (message) {
+      client.invalidateQueries(["problems"]);
+    }
+  };
   return (
     <button
-      className={`${styles.button} ${styles[clicked ? "blue" : "gray"]}`}
+      className={`${styles.button} ${styles[color]}`}
       type={type}
       onClick={handleButtonToggle}
       disabled={userData?.user_auth !== 1}
     >
-      {clicked ? "도전 중" : "아직 안품"}
+      {label}
     </button>
   );
 }

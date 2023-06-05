@@ -46,11 +46,22 @@ export async function getSearchProblem(problem_num, token) {
 }
 
 //도전자수 갱신
-export async function postChallenge(problem_num, user_id) {
-  const url = `${BASE_URL}/problem/${problem_num}/${user_id}/challenge `;
-  const res = await axios.post(url);
-
-  console.log(res.data);
+export async function postChallenge(problem_num, token, state) {
+  try {
+    const url = state
+      ? `${BASE_URL}/problem/unchallenge/${problem_num}`
+      : `${BASE_URL}/problem/challenge/${problem_num}`;
+    const res = await axios({
+      method: "post",
+      url,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data.message;
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 //추천 문제 받기

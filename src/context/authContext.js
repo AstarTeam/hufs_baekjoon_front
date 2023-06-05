@@ -16,7 +16,6 @@ export function AuthContextProvider({ children }) {
       ...JSON.parse(sessionStorage.getItem("userData")),
     });
   }, []);
-  console.log(userData);
 
   //로그인 함수
   const handleLogin = async data => {

@@ -16,19 +16,25 @@ import styles from "./problemList.module.css";
 import SearchInput from "../../common/searchInput/SearchInput";
 
 function ProblemList() {
+  const inputRef = useRef();
+  const problemListRef = useRef(null);
+
+  const { userData } = useAuthContext();
+
   const [page, setPage] = useState(1);
   const [selected, setSelected] = useState(selectList[0]); //정렬 방법
   const [searchNum, setSearchNum] = useState(null);
-  const inputRef = useRef();
 
-  const { userData } = useAuthContext();
+  const queryKeys = !searchNum
+    ? ["problems", page, selected.type]
+    : ["problems", page, selected.type, searchNum];
 
   const {
     isLoading,
     error,
     data: problemList,
   } = useQuery(
-    ["problems", page, selected.type, searchNum],
+    queryKeys,
     () => {
       if (searchNum) {
         return getSearchProblem(searchNum, userData?.access_token);
@@ -40,6 +46,7 @@ function ProblemList() {
       staleTime: 1000 * 60 * 5,
     }
   );
+
   const totalPage = Math.floor(problemList?.total / 15);
 
   //prefetch
@@ -54,7 +61,6 @@ function ProblemList() {
   }, [totalPage, page, queryClient, selected.type, userData?.access_token]);
 
   //페이지 버튼 클릭시 리스트 처음으로 스크롤
-  const problemListRef = useRef(null);
   const scrollToList = () =>
     problemListRef.current.scrollIntoView({
       block: "start",
@@ -67,7 +73,7 @@ function ProblemList() {
 
   const selectChangeHandler = item => {
     setSelected(item);
-    setSearchNum(null);
+    setSearchNum(undefined);
     setPage(1);
   };
 
@@ -151,8 +157,9 @@ const columnList = [
       <Button
         label={`${value ? "도전 중" : "아직 안품"}`}
         color={`${value ? "blue" : "gray"}`}
-        value={value}
-        onClick={() => postChallenge(row.original.problem_num)}
+        problemNum={row.original.problem_num}
+        state={value}
+        onClick={postChallenge}
       />
     ),
   },
