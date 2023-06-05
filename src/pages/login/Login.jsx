@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../context/authContext";
+import { useQueryClient } from "@tanstack/react-query";
 import styles from "./login.module.css";
 
 function Login() {
@@ -9,6 +10,7 @@ function Login() {
     password: "",
   });
   const { onLogin } = useAuthContext();
+  const client = useQueryClient();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -18,6 +20,7 @@ function Login() {
   const handleSubmit = async e => {
     e.preventDefault();
     onLogin(form);
+    client.invalidateQueries(["problems"]);
   };
 
   return (
