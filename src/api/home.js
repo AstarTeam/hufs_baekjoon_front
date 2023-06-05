@@ -1,6 +1,16 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/url";
 
+//랭크 받기
+export async function getRankData() {
+  try {
+    const res = await axios(`${BASE_URL}/ranking-info`);
+    return res.data[0];
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 //문제 리스트 받기
 export async function getProblemList(page, type, token) {
   try {

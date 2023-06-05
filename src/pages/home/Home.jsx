@@ -1,17 +1,12 @@
 import React from "react";
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { getRankData } from "../../api/home";
 import Banner from "../../components/home/banner/Banner";
 import RankBox from "../../components/home/rankBox/RankBox";
 import ProblemList from "../../components/home/problemList/ProblemList";
 import styles from "./home.module.css";
 import Loading from "../../components/common/loading/Loading";
 import Recommend from "../../components/home/recommend/Recommend";
-
-async function getRankData() {
-  const res = await axios(`/data/rank.json`);
-  return res.data.rank;
-}
 
 function Home() {
   const {
