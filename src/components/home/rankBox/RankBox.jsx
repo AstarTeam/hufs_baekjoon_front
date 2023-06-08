@@ -5,13 +5,13 @@ function RankBox({ rank }) {
   const {
     hufs_rank,
     hufs_now_solved,
-    hufs_pre_solved,
+    // hufs_pre_solved,
     high_rank_name,
     high_rank_now_solved,
-    high_rank_pre_solved,
+    // high_rank_pre_solved,
     low_rank_name,
     low_rank_now_solved,
-    low_rank_pre_solved,
+    // low_rank_pre_solved,
   } = rank;
 
   return (
