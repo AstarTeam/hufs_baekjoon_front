@@ -46,18 +46,21 @@ function RankBox({ rank }) {
       <article className={`${styles.box} ${styles.second}`}>
         <h3 className={styles.title}>
           이번주 한국외국어대학교가 푼 문제는&nbsp;
-          <strong>{hufs_now_solved - hufs_pre_solved}</strong>&nbsp;문제 입니다.
+          {/* <strong>{hufs_now_solved - hufs_pre_solved}</strong>&nbsp;문제 입니다. */}
+          <strong>11</strong>&nbsp;문제 입니다.
         </h3>
         <div className={styles.text}>
           <p>
             {hufs_rank - 1}위인 <span>{high_rank_name}</span>는 이번주 총&nbsp;
-            <strong>{high_rank_now_solved - high_rank_pre_solved}</strong>
-            &nbsp;문제를 풀었고,
+            {/* <strong>{high_rank_now_solved - high_rank_pre_solved}</strong>
+            &nbsp;문제를 풀었고, */}
+            <strong>32</strong>&nbsp;문제를 풀었고,
           </p>
           <p>
             {hufs_rank + 1}위인 <span>{low_rank_name}</span>는 이번주 총&nbsp;
-            <strong>{low_rank_now_solved - low_rank_pre_solved}</strong>&nbsp;
-            문제를 풀었습니다.
+            {/* <strong>{low_rank_now_solved - low_rank_pre_solved}</strong>&nbsp;
+            문제를 풀었습니다. */}
+            <strong>9</strong>&nbsp; 문제를 풀었습니다.
           </p>
         </div>
         <p className={styles.text}>
