@@ -9,11 +9,11 @@
 }
 
 .spinner {
-  position: absolute;
-  left: 45%;
-  top: 45%;
   width: 7rem;
   height: 7rem;
+  position: absolute;
+  left: calc(50% - 35px);
+  top: calc(50% - 35px);
   border: 0.3rem solid var(--color-border);
   border-top: 0.3rem solid var(--color-primary);
   border-radius: 50%;
